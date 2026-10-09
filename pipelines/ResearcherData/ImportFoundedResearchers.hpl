@@ -31,7 +31,7 @@
     <lazy_conversion>Y</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <newline_possible>N</newline_possible>
     <schemaDefinition/>
     <ignoreFields>N</ignoreFields>

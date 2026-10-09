@@ -146,7 +146,7 @@ WHERE lattes_id IS NOT NULL ORDER BY lattes_id, graduate_program_id</sql>
     <copies>1</copies>
     <GUI>
       <xloc>32</xloc>
-      <yloc>96</yloc>
+      <yloc>112</yloc>
     </GUI>
     <description/>
     <partitioning>

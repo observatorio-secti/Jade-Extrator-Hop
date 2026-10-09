@@ -269,30 +269,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>RowsFromResult</type>
-    <name>Get rows files xml</name>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>None</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <distribute>N</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>0</xloc>
-      <yloc>224</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>TableOutput</type>
     <name>Insert table guidance</name>
     <connection>ApplicationDB</connection>
@@ -343,6 +319,10 @@
       <field>
         <stream_name>ANO</stream_name>
         <column_name>year</column_name>
+      </field>
+      <field>
+        <stream_name>SEQUENCIA-PRODUCAO</stream_name>
+        <column_name>sequence_code</column_name>
       </field>
     </fields>
     <distribute>Y</distribute>
@@ -517,6 +497,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>ISO-8859-1</encoding>
     <XmlField>filename</XmlField>
@@ -638,6 +633,21 @@
       <field>
         <name>ANO</name>
         <xPath>DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO/@ANO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -783,6 +793,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>ISO-8859-1</encoding>
     <XmlField>filename</XmlField>
@@ -904,6 +929,21 @@
       <field>
         <name>ANO</name>
         <xPath>DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO/@ANO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1049,6 +1089,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>ISO-8859-1</encoding>
     <XmlField>filename</XmlField>
@@ -1170,6 +1225,21 @@
       <field>
         <name>ANO</name>
         <xPath>DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO/@ANO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1315,6 +1385,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>ISO-8859-1</encoding>
     <XmlField>filename</XmlField>
@@ -1448,6 +1533,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>ISO-8859-1</encoding>
     <XmlField>filename</XmlField>
@@ -1520,6 +1620,11 @@
       </field>
       <field>
         <name>ANO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -1603,6 +1708,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -1649,6 +1759,11 @@
       </field>
       <field>
         <name>ANO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -1731,6 +1846,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -1777,6 +1897,11 @@
       </field>
       <field>
         <name>ANO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -1829,6 +1954,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -1875,6 +2005,11 @@
       </field>
       <field>
         <name>ANO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -1927,6 +2062,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -1973,6 +2113,11 @@
       </field>
       <field>
         <name>ANO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -3069,6 +3214,41 @@ FROM "public".researcher
     </partitioning>
     <attributes/>
   </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Leitura dos XML</name>
+    <file>
+      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
+      <filemask>.*xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <file>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>Y</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>N</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>432</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
   <order>
     <hop>
       <from>Read XML guidance "mestrado-concluída"</from>
@@ -3351,42 +3531,42 @@ FROM "public".researcher
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "mestrado-concluída"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "doutorado-concluída"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "outras-concluída"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "mestrado-andamento"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "doutorado-andamento"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "Iniciação Científica-Andamento"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "Pos-Doutorado-Andamento" 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML guidance "Pos-Doutorado-Andamento" 2 2</to>
       <enabled>Y</enabled>
     </hop>

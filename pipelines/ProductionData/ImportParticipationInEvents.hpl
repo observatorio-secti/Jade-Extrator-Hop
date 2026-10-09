@@ -444,6 +444,21 @@
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
       </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+      </field>
     </fields>
     <file>
       <file_required>N</file_required>
@@ -592,6 +607,21 @@
         <trim_type>none</trim_type>
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
       </field>
     </fields>
     <file>
@@ -742,6 +772,21 @@
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
       </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+      </field>
     </fields>
     <file>
       <file_required>N</file_required>
@@ -890,6 +935,21 @@
         <trim_type>none</trim_type>
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
       </field>
     </fields>
     <file>
@@ -1040,6 +1100,21 @@
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
       </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+      </field>
     </fields>
     <file>
       <file_required>N</file_required>
@@ -1189,6 +1264,21 @@
         <type>None</type>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
       </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>None</type>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+      </field>
     </fields>
     <file>
       <file_required>N</file_required>
@@ -1298,6 +1388,12 @@
         <name>Titulo </name>
         <precision>-2</precision>
         <rename>title</rename>
+      </field>
+      <field>
+        <length>-2</length>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <precision>-2</precision>
+        <rename>sequence_code</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2309,6 +2405,10 @@ FROM "public".researcher
       <field>
         <column_name>title</column_name>
         <stream_name>title</stream_name>
+      </field>
+      <field>
+        <column_name>sequence_code</column_name>
+        <stream_name>sequence_code</stream_name>
       </field>
     </fields>
     <ignore_errors>N</ignore_errors>

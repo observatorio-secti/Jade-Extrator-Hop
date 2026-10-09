@@ -249,7 +249,7 @@
       <to>HTTP</to>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>HTTP</from>

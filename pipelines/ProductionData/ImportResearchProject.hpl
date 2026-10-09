@@ -82,11 +82,15 @@
     <name>Read XML Participação em projeto</name>
     <file>
       <name>${PROJECT_HOME}/datasets/lattes_xml/curriculos_xml/Teste/00131639579.xml</name>
+      <filemask/>
+      <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
     </file>
     <include>N</include>
+    <include_field/>
     <rownum>N</rownum>
+    <rownum_field/>
     <limit>0</limit>
     <loopxpath>/CURRICULO-VITAE/DADOS-GERAIS/ATUACOES-PROFISSIONAIS/ATUACAO-PROFISSIONAL/ATIVIDADES-DE-PARTICIPACAO-EM-PROJETO/PARTICIPACAO-EM-PROJETO/PROJETO-DE-PESQUISA</loopxpath>
     <fields>
@@ -97,7 +101,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -112,7 +116,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -127,7 +131,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -142,7 +146,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -157,7 +161,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -172,7 +176,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -187,7 +191,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -202,7 +206,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -217,7 +221,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -232,7 +236,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -247,7 +251,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -262,7 +266,7 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -277,7 +281,22 @@
         <length>-1</length>
         <format/>
         <trim_type>none</trim_type>
-        <element_type>node</element_type>
+        <element_type>Node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SEQUENCIA-PROJETO</name>
+        <xPath>@SEQUENCIA-PROJETO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>Node</element_type>
         <result_type>valueof</result_type>
         <precision>-1</precision>
         <currency/>
@@ -298,6 +317,15 @@
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
     <ignorecomments>N</ignorecomments>
     <readurl>N</readurl>
+    <prunePath/>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <distribute>N</distribute>
     <copies>1</copies>
     <GUI>
@@ -390,6 +418,12 @@
       <field>
         <name>DESCRICAO-DO-PROJETO</name>
         <rename>description</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>SEQUENCIA-PROJETO</name>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -621,6 +655,10 @@
     <change_column_types>N</change_column_types>
     <fields>
       <field>
+        <stream_name>SEQUENCIA-PROJETO</stream_name>
+        <column_name>sequence_code</column_name>
+      </field>
+      <field>
         <stream_name>start_year</stream_name>
         <column_name>start_year</column_name>
       </field>
@@ -799,7 +837,7 @@ FROM researcher</sql>
   <transform>
     <type>TableInput</type>
     <name>Buscando projetos antigos</name>
-    <sql>SELECT start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db
+    <sql>SELECT start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db, sequence_code
 FROM research_project</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -840,7 +878,7 @@ FROM research_project</sql>
         <presorted>N</presorted>
       </field>
       <field>
-        <name>start_year_db</name>
+        <name>sequence_code</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -888,7 +926,7 @@ FROM research_project</sql>
         <presorted>N</presorted>
       </field>
       <field>
-        <name>start_year</name>
+        <name>SEQUENCIA-PROJETO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -924,12 +962,12 @@ FROM research_project</sql>
     <keys_1>
       <key>researcher_id</key>
       <key>project_name</key>
-      <key>start_year</key>
+      <key>SEQUENCIA-PROJETO</key>
     </keys_1>
     <keys_2>
       <key>researcher_id_db</key>
       <key>project_name_db</key>
-      <key>start_year_db</key>
+      <key>sequence_code</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
