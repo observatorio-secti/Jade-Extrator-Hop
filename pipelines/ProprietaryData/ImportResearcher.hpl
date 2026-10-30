@@ -80,9 +80,10 @@
     <connection>ApplicationAdminDB</connection>
     <execute_each_row>N</execute_each_row>
     <limit>0</limit>
-    <sql>SELECT researcher.lattes_id, extra_field, status, institution.acronym
-FROM public.researcher
-LEFT JOIN institution ON researcher.institution_id = institution.institution_id</sql>
+    <sql>SELECT r.lattes_id, i.acronym
+FROM academic.researchers r
+LEFT JOIN academic.researcher_institutions ri ON r.id = ri.researcher_id
+LEFT JOIN academic.institutions i ON ri.institution_id = i.id</sql>
     <variables_active>N</variables_active>
     <attributes/>
     <GUI>
@@ -307,7 +308,7 @@ LEFT JOIN institution ON researcher.institution_id = institution.institution_id<
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
+    <join_type>RIGHT OUTER</join_type>
     <keys_1>
       <key>acronym</key>
     </keys_1>
@@ -344,23 +345,8 @@ LEFT JOIN institution ON researcher.institution_id = institution.institution_id<
       </key>
       <schema>"public"</schema>
       <table>researcher</table>
-      <value>
-        <name>institution_id</name>
-        <rename>institution_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>extra_field</name>
-        <rename>extra_field</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>status</name>
-        <rename>status</rename>
-        <update>Y</update>
-      </value>
     </lookup>
-    <update_bypassed>N</update_bypassed>
+    <update_bypassed>Y</update_bypassed>
     <attributes/>
     <GUI>
       <xloc>864</xloc>

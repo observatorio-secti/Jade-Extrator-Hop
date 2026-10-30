@@ -152,24 +152,6 @@ DELETE FROM graduate_program;</sql>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
-    <action>
-      <sql>UPDATE researcher SET institution_id = (SELECT id FROM institution WHERE acronym = 'EXTERNA') 
-WHERE institution_id IN (SELECT id FROM institution WHERE acronym IS NULL)</sql>
-      <connection>ApplicationDB</connection>
-      <useVariableSubstitution>N</useVariableSubstitution>
-      <sqlfromfile>N</sqlfromfile>
-      <sqlfilename/>
-      <sqlfilename_encoding/>
-      <sendOneStatement>N</sendOneStatement>
-      <name>Instituição não cadastrada</name>
-      <description/>
-      <type>SQL</type>
-      <attributes/>
-      <xloc>592</xloc>
-      <yloc>176</yloc>
-      <parallel>N</parallel>
-      <attributes_hac/>
-    </action>
   </actions>
   <hops>
     <hop>
@@ -184,34 +166,6 @@ WHERE institution_id IN (SELECT id FROM institution WHERE acronym IS NULL)</sql>
       <to>ImportResearcher.hpl</to>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>LIMPEZA DOS PROGRAMAS DE PÓS</from>
-      <to>ImportGraduateProgram.hpl</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ImportGraduateProgram.hpl</from>
-      <to>ImportGraduateProgramResearcher.hpl</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ImportResearcher.hpl</from>
-      <to>Instituição não cadastrada</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Instituição não cadastrada</from>
-      <to>LIMPEZA DOS PROGRAMAS DE PÓS</to>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
       <enabled>Y</enabled>
     </hop>
   </hops>

@@ -46,8 +46,8 @@
   <transform>
     <type>TableInput</type>
     <name>IMPORT INSTITUTION</name>
-    <sql>SELECT name, acronym
-FROM public.institution;</sql>
+    <sql>SELECT INITCAP(LOWER(name)) AS name, acronym
+FROM academic.institutions;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -66,33 +66,12 @@ FROM public.institution;</sql>
     <attributes/>
   </transform>
   <transform>
-    <type>TableInput</type>
-    <name>IMPORT INSTITUTION 2</name>
-    <sql>SELECT id, name, acronym FROM institution</sql>
-    <limit>0</limit>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <connection>ApplicationDB</connection>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>96</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>InsertUpdate</type>
     <name>Insert / update</name>
     <lookup>
       <key>
-        <name>id</name>
-        <field>id</field>
+        <name>name</name>
+        <field>name</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -125,121 +104,10 @@ FROM public.institution;</sql>
     </partitioning>
     <attributes/>
   </transform>
-  <transform>
-    <type>MergeJoin</type>
-    <name>Merge join</name>
-    <join_type>LEFT OUTER</join_type>
-    <transform1>Sort rows</transform1>
-    <transform2>Sort rows 2</transform2>
-    <keys_1>
-      <key>acronym</key>
-    </keys_1>
-    <keys_2>
-      <key>acronym</key>
-    </keys_2>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
-    <type>SortRows</type>
-    <name>Sort rows</name>
-    <fields>
-      <field>
-        <name>name</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <directory>${java.io.tmpdir}</directory>
-    <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <unique_rows>N</unique_rows>
-    <compress>N</compress>
-    <compress_variables/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>272</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
-    <type>SortRows</type>
-    <name>Sort rows 2</name>
-    <fields>
-      <field>
-        <name>name</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <directory>${java.io.tmpdir}</directory>
-    <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <unique_rows>N</unique_rows>
-    <compress>N</compress>
-    <compress_variables/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>96</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
   <order>
     <hop>
       <from>IMPORT INSTITUTION</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join</from>
       <to>Filter rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>IMPORT INSTITUTION 2</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
