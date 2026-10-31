@@ -61,67 +61,62 @@
     <attributes/>
   </transform>
   <transform>
-    <type>InsertUpdate</type>
     <name>Insert table researcher_area_expertise</name>
-    <lookup>
-      <key>
-        <name>researcher_id</name>
-        <field>researcher_id</field>
-        <condition>=</condition>
-      </key>
-      <key>
-        <name>order</name>
-        <field>order</field>
-        <condition>=</condition>
-      </key>
-      <value>
-        <name>sub_area_expertise_id</name>
-        <rename>sub_area_expertise_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>researcher_id</name>
-        <rename>researcher_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>order</name>
-        <rename>order</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>area_expertise_id</name>
-        <rename>area_expertise_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>great_area_expertise_id</name>
-        <rename>great_area_expertise_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>area_specialty_id</name>
-        <rename>area_specialty_id</rename>
-        <update>Y</update>
-      </value>
-      <schema>"public"</schema>
-      <table>researcher_area_expertise</table>
-    </lookup>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <connection>ApplicationDB</connection>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>2240</xloc>
-      <yloc>624</yloc>
-    </GUI>
+    <type>TableOutput</type>
     <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <connection>ApplicationDB</connection>
+    <schema>"public"</schema>
+    <table>researcher_area_expertise</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <only_when_have_rows>N</only_when_have_rows>
+    <fields>
+      <field>
+        <column_name>researcher_id</column_name>
+        <stream_name>researcher_id</stream_name>
+      </field>
+      <field>
+        <column_name>order</column_name>
+        <stream_name>order</stream_name>
+      </field>
+      <field>
+        <column_name>great_area_expertise_id</column_name>
+        <stream_name>great_area_expertise_id</stream_name>
+      </field>
+      <field>
+        <column_name>area_expertise_id</column_name>
+        <stream_name>area_expertise_id</stream_name>
+      </field>
+      <field>
+        <column_name>sub_area_expertise_id</column_name>
+        <stream_name>sub_area_expertise_id</stream_name>
+      </field>
+      <field>
+        <column_name>area_specialty_id</column_name>
+        <stream_name>area_specialty_id</stream_name>
+      </field>
+    </fields>
     <attributes/>
+    <GUI>
+      <xloc>2240</xloc>
+      <yloc>624</yloc>
+    </GUI>
   </transform>
   <transform>
     <type>MergeJoin</type>
@@ -163,10 +158,10 @@
     <transform1>Sort researcher_name</transform1>
     <transform2>Sort rows 2</transform2>
     <keys_1>
-      <key>researcher_name</key>
+      <key>lattes_id</key>
     </keys_1>
     <keys_2>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -188,9 +183,11 @@
     <transform1>Sort  are expertise db 2</transform1>
     <transform2>Sort by Area do Conhecimento </transform2>
     <keys_1>
+      <key>great_area_expertise_id_db</key>
       <key>area_expertise_name</key>
     </keys_1>
     <keys_2>
+      <key>great_area_expertise_id</key>
       <key>NOME-DA-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -238,9 +235,11 @@
     <transform1>Sort  sub are expertise db</transform1>
     <transform2>Sort by sub Area do Conhecimento </transform2>
     <keys_1>
+      <key>area_expertise_id_db</key>
       <key>sub_area_expertise_name</key>
     </keys_1>
     <keys_2>
+      <key>area_expertise_id</key>
       <key>NOME-DA-SUB-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -263,9 +262,11 @@
     <transform1>Sort  area_specialty db </transform1>
     <transform2>Sort by area_specialty</transform2>
     <keys_1>
+      <key>sub_area_expertise_id_db</key>
       <key>area_specialty_name</key>
     </keys_1>
     <keys_2>
+      <key>sub_area_expertise_id</key>
       <key>NOME-DA-ESPECIALIDADE</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -503,6 +504,12 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>great_area_expertise_id</name>
+        <rename>great_area_expertise_id_db</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -600,6 +607,12 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>area_expertise_id</name>
+        <rename>area_expertise_id_db</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -628,6 +641,12 @@
       <field>
         <name>name</name>
         <rename>area_specialty_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>sub_area_expertise_id</name>
+        <rename>sub_area_expertise_id_db</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -757,6 +776,14 @@
     <name>Sort  are expertise db 2</name>
     <fields>
       <field>
+        <name>great_area_expertise_id_db</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>area_expertise_name</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -787,6 +814,14 @@
     <type>SortRows</type>
     <name>Sort  area_specialty db </name>
     <fields>
+      <field>
+        <name>sub_area_expertise_id_db</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>area_specialty_name</name>
         <ascending>Y</ascending>
@@ -819,6 +854,14 @@
     <name>Sort  sub are expertise db</name>
     <fields>
       <field>
+        <name>area_expertise_id_db</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>sub_area_expertise_name</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -850,6 +893,14 @@
     <name>Sort by Area do Conhecimento </name>
     <fields>
       <field>
+        <name>great_area_expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>NOME-DA-AREA-DO-CONHECIMENTO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -880,6 +931,14 @@
     <type>SortRows</type>
     <name>Sort by area_specialty</name>
     <fields>
+      <field>
+        <name>sub_area_expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>NOME-DA-ESPECIALIDADE</name>
         <ascending>Y</ascending>
@@ -943,6 +1002,14 @@
     <name>Sort by sub Area do Conhecimento </name>
     <fields>
       <field>
+        <name>area_expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -1005,7 +1072,7 @@
     <name>Sort researcher_name</name>
     <fields>
       <field>
-        <name>researcher_name</name>
+        <name>lattes_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1099,7 +1166,7 @@
     <name>Sort rows 2</name>
     <fields>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
