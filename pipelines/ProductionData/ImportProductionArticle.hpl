@@ -609,7 +609,7 @@
     <extensionFieldName/>
     <sizeFieldName/>
     <distribute>N</distribute>
-    <copies>1</copies>
+    <copies>4</copies>
     <GUI>
       <xloc>96</xloc>
       <yloc>272</yloc>

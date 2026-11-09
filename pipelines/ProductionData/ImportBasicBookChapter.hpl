@@ -716,7 +716,7 @@
     <extensionFieldName/>
     <sizeFieldName/>
     <distribute>Y</distribute>
-    <copies>1</copies>
+    <copies>4</copies>
     <GUI>
       <xloc>224</xloc>
       <yloc>592</yloc>

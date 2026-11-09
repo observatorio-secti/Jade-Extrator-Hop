@@ -27,7 +27,7 @@
       <attributes/>
       <xloc>96</xloc>
       <yloc>176</yloc>
-      <parallel>N</parallel>
+      <parallel>Y</parallel>
       <attributes_hac/>
     </action>
     <action>
@@ -137,10 +137,10 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ImportBibliographicProduction.hwf</from>
+      <from>Start</from>
       <to>ImportTechnicalProduction.hwf</to>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
       <enabled>Y</enabled>
     </hop>
     <hop>

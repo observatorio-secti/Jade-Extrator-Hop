@@ -137,7 +137,7 @@
     <ignorecomments>N</ignorecomments>
     <readurl>N</readurl>
     <distribute>N</distribute>
-    <copies>1</copies>
+    <copies>4</copies>
     <GUI>
       <xloc>320</xloc>
       <yloc>240</yloc>

@@ -184,7 +184,7 @@
     <ignorecomments>N</ignorecomments>
     <readurl>N</readurl>
     <distribute>N</distribute>
-    <copies>1</copies>
+    <copies>4</copies>
     <GUI>
       <xloc>208</xloc>
       <yloc>256</yloc>

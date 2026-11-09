@@ -329,7 +329,7 @@
     <ignorecomments>N</ignorecomments>
     <readurl>N</readurl>
     <distribute>Y</distribute>
-    <copies>1</copies>
+    <copies>4</copies>
     <GUI>
       <xloc>496</xloc>
       <yloc>400</yloc>
