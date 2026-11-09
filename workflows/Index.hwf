@@ -126,30 +126,6 @@
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
-    <action>
-      <filename>${PROJECT_HOME}/workflows/ImportProprietaryData.hwf</filename>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <set_append_logfile>N</set_append_logfile>
-      <create_parent_folder>N</create_parent_folder>
-      <wait_until_finished>Y</wait_until_finished>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <run_configuration>local</run_configuration>
-      <name>ImportProprietaryData.hwf</name>
-      <description/>
-      <type>WORKFLOW</type>
-      <attributes/>
-      <xloc>336</xloc>
-      <yloc>320</yloc>
-      <parallel>N</parallel>
-      <attributes_hac/>
-    </action>
   </actions>
   <hops>
     <hop>
@@ -165,13 +141,6 @@
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
       <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ImportProductionData.hwf</from>
-      <to>ImportProprietaryData.hwf</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Start</from>
