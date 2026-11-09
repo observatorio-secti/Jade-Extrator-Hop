@@ -25,8 +25,8 @@
       <description/>
       <type>SPECIAL</type>
       <attributes/>
-      <xloc>16</xloc>
-      <yloc>144</yloc>
+      <xloc>336</xloc>
+      <yloc>80</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -49,8 +49,8 @@
       <description/>
       <type>WORKFLOW</type>
       <attributes/>
-      <xloc>272</xloc>
-      <yloc>144</yloc>
+      <xloc>592</xloc>
+      <yloc>80</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -73,8 +73,8 @@
       <description/>
       <type>WORKFLOW</type>
       <attributes/>
-      <xloc>464</xloc>
-      <yloc>144</yloc>
+      <xloc>784</xloc>
+      <yloc>80</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -97,8 +97,8 @@
       <description/>
       <type>WORKFLOW</type>
       <attributes/>
-      <xloc>464</xloc>
-      <yloc>384</yloc>
+      <xloc>784</xloc>
+      <yloc>320</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -121,8 +121,8 @@
       <description/>
       <type>WORKFLOW</type>
       <attributes/>
-      <xloc>240</xloc>
-      <yloc>384</yloc>
+      <xloc>560</xloc>
+      <yloc>320</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -145,8 +145,8 @@
       <description/>
       <type>WORKFLOW</type>
       <attributes/>
-      <xloc>64</xloc>
-      <yloc>384</yloc>
+      <xloc>336</xloc>
+      <yloc>320</yloc>
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
@@ -171,7 +171,7 @@
       <to>ImportProprietaryData.hwf</to>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Start</from>
