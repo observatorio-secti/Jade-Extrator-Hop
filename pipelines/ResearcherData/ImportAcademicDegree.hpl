@@ -86,6 +86,7 @@
       </field>
     </fields>
     <optimizationLevel>9</optimizationLevel>
+    <languageVersion>ES6</languageVersion>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -518,7 +519,7 @@
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>512</xloc>
       <yloc>112</yloc>
     </GUI>
     <description/>
@@ -568,8 +569,8 @@
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>432</yloc>
+      <xloc>192</xloc>
+      <yloc>416</yloc>
     </GUI>
     <partitioning>
       <method>none</method>
@@ -603,8 +604,8 @@
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>160</yloc>
+      <xloc>192</xloc>
+      <yloc>96</yloc>
     </GUI>
     <partitioning>
       <method>none</method>
