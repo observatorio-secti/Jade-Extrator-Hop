@@ -18,6 +18,37 @@
     <modified_date>2023/07/04 08:09:20.670</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos RELATORIO-DE-PESQUISA</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>RELATORIO\-DE\-PESQUISA_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>432</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Dummy</type>
     <name>Dummy (already registered)</name>
     <distribute>Y</distribute>
@@ -101,7 +132,7 @@
     <rownum>N</rownum>
     <rownum_field/>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-TECNICA/DEMAIS-TIPOS-DE-PRODUCAO-TECNICA/RELATORIO-DE-PESQUISA</loopxpath>
+    <loopxpath>/R/F/RELATORIO-DE-PESQUISA</loopxpath>
     <fields>
       <field>
         <name>ANO</name>
@@ -165,7 +196,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -194,7 +225,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -347,30 +378,6 @@
     <GUI>
       <xloc>576</xloc>
       <yloc>464</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
-    <type>RowsFromResult</type>
-    <name>Get rows files xml</name>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>None</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>336</yloc>
     </GUI>
     <description/>
     <partitioning>
@@ -928,48 +935,7 @@ FROM "public".research_report
     </partitioning>
     <attributes/>
   </transform>
-  <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>464</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
   <order>
-    <hop>
-      <from>Get rows files xml</from>
-      <to>Get data from XML</to>
-      <enabled>N</enabled>
-    </hop>
     <hop>
       <from>Get data from XML</from>
       <to>Filter rows</to>
@@ -1061,7 +1027,7 @@ FROM "public".research_report
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos RELATORIO-DE-PESQUISA</from>
       <to>Get data from XML</to>
       <enabled>Y</enabled>
     </hop>

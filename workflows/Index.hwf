@@ -126,6 +126,163 @@
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
+    <action>
+      <arg_from_previous>N</arg_from_previous>
+      <fields>
+        <field>
+          <name>${java.io.tmpdir}/jade_xml_staging</name>
+        </field>
+      </fields>
+      <limit_folders>10</limit_folders>
+      <success_condition>success_if_no_errors</success_condition>
+      <name>Limpa blocos anteriores</name>
+      <description/>
+      <type>DELETE_FOLDERS</type>
+      <attributes/>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <sql>DROP SCHEMA IF EXISTS hop_stg CASCADE;
+CREATE SCHEMA hop_stg;
+CREATE UNLOGGED TABLE hop_stg.lattes_node (file_key text NOT NULL, node_type text NOT NULL, fragment text NOT NULL);
+CREATE UNLOGGED TABLE hop_stg.lattes_cv (file_key text NOT NULL, numero_identificador text, data_atualizacao text, hora_atualizacao text, nome_completo text, pais_de_nascimento text, texto_titulo_jornal_ou_revista text, texto_issn text, cidade_nascimento text, uf_nascimento text, sigla_pais_nacionalidade text, pais_de_nacionalidade text, orcid_id text, nome_em_citacoes_bibliograficas text, resumo_cv_texto_resumo_cv_rh text, resumo_cv_texto_resumo_cv_rh_en text, outras_informacoes_relevantes_outras_informacoes_relevantes text, endereco_endereco_profissional_nome_instituicao_empresa text);
+CREATE FUNCTION hop_stg.xml_attr(t text) RETURNS text LANGUAGE sql IMMUTABLE AS $$ SELECT replace(replace(replace(replace(replace(replace(coalesce(t, ''), chr(38), '&amp;amp' || chr(59)), '&lt;', '&amp;lt' || chr(59)), '"', '&amp;quot' || chr(59)), chr(13), '&amp;#13' || chr(59)), chr(10), '&amp;#10' || chr(59)), chr(9), '&amp;#9' || chr(59)) $$;</sql>
+      <connection>ApplicationDB</connection>
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sqlfromfile>N</sqlfromfile>
+      <sendOneStatement>N</sendOneStatement>
+      <name>Prepara staging dos XML</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <xloc>336</xloc>
+      <yloc>240</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <filename>${PROJECT_HOME}/pipelines/ExtractXML.hpl</filename>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <create_parent_folder>N</create_parent_folder>
+      <set_logfile>N</set_logfile>
+      <set_append_logfile>N</set_append_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <wait_until_finished>Y</wait_until_finished>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <run_configuration>local</run_configuration>
+      <name>ExtractXML.hpl</name>
+      <type>PIPELINE</type>
+      <attributes/>
+      <xloc>464</xloc>
+      <yloc>240</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <sql>CREATE UNIQUE INDEX lattes_cv_file_key ON hop_stg.lattes_cv (file_key);
+ANALYZE hop_stg.lattes_cv;
+ANALYZE hop_stg.lattes_node;
+CREATE UNLOGGED TABLE hop_stg.lattes_type AS
+SELECT node_type, greatest(1, ceil(sum(length(fragment)) / 8000000.0))::int AS buckets
+FROM hop_stg.lattes_node GROUP BY node_type;
+SET work_mem = '256MB';
+CREATE UNLOGGED TABLE hop_stg.lattes_line AS
+SELECT n.node_type, abs(hashtext(n.file_key)) % t.buckets AS bucket,
+       '&lt;F ' || 'numero_identificador="' || hop_stg.xml_attr(c.numero_identificador) || '"' || ' ' || 'nome_completo="' || hop_stg.xml_attr(c.nome_completo) || '"' || ' ' || 'pais_de_nascimento="' || hop_stg.xml_attr(c.pais_de_nascimento) || '"' || ' ' || 'texto_titulo_jornal_ou_revista="' || hop_stg.xml_attr(c.texto_titulo_jornal_ou_revista) || '"' || ' ' || 'texto_issn="' || hop_stg.xml_attr(c.texto_issn) || '"' || '&gt;' || replace(replace(replace(n.fragment, chr(13), '&amp;#13' || chr(59)), chr(10), '&amp;#10' || chr(59)), chr(9), '&amp;#9' || chr(59)) || '&lt;/F&gt;' AS piece
+FROM hop_stg.lattes_node n
+JOIN hop_stg.lattes_type t ON t.node_type = n.node_type
+LEFT JOIN hop_stg.lattes_cv c ON c.file_key = n.file_key
+ORDER BY 1, 2;
+RESET work_mem;
+DROP TABLE hop_stg.lattes_node;
+CREATE INDEX lattes_line_chunk ON hop_stg.lattes_line (node_type, bucket);
+ANALYZE hop_stg.lattes_line;
+ANALYZE hop_stg.lattes_type;</sql>
+      <connection>ApplicationDB</connection>
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sqlfromfile>N</sqlfromfile>
+      <sendOneStatement>N</sendOneStatement>
+      <name>Agrupa staging dos XML</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <xloc>592</xloc>
+      <yloc>240</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <filename>${PROJECT_HOME}/pipelines/WriteXMLChunks.hpl</filename>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <create_parent_folder>N</create_parent_folder>
+      <set_logfile>N</set_logfile>
+      <set_append_logfile>N</set_append_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <wait_until_finished>Y</wait_until_finished>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <run_configuration>local</run_configuration>
+      <name>WriteXMLChunks.hpl</name>
+      <type>PIPELINE</type>
+      <attributes/>
+      <xloc>720</xloc>
+      <yloc>240</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <sql>DROP SCHEMA IF EXISTS hop_stg CASCADE;</sql>
+      <connection>ApplicationDB</connection>
+      <useVariableSubstitution>N</useVariableSubstitution>
+      <sqlfromfile>N</sqlfromfile>
+      <sendOneStatement>N</sendOneStatement>
+      <name>Remove staging dos XML</name>
+      <description/>
+      <type>SQL</type>
+      <attributes/>
+      <xloc>336</xloc>
+      <yloc>400</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
+    <action>
+      <arg_from_previous>N</arg_from_previous>
+      <fields>
+        <field>
+          <name>${java.io.tmpdir}/jade_xml_staging</name>
+        </field>
+      </fields>
+      <limit_folders>10</limit_folders>
+      <success_condition>success_if_no_errors</success_condition>
+      <name>Remove blocos</name>
+      <description/>
+      <type>DELETE_FOLDERS</type>
+      <attributes/>
+      <xloc>464</xloc>
+      <yloc>400</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
   </actions>
   <hops>
     <hop>
@@ -143,15 +300,64 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>ImportExpertiseData.hwf</from>
+      <to>ImportResearcherData.hwf</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Start</from>
-      <to>ImportBasicData.hwf</to>
+      <to>Limpa blocos anteriores</to>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ImportExpertiseData.hwf</from>
-      <to>ImportResearcherData.hwf</to>
+      <from>Limpa blocos anteriores</from>
+      <to>Prepara staging dos XML</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Prepara staging dos XML</from>
+      <to>ExtractXML.hpl</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ExtractXML.hpl</from>
+      <to>Agrupa staging dos XML</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Agrupa staging dos XML</from>
+      <to>WriteXMLChunks.hpl</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>WriteXMLChunks.hpl</from>
+      <to>ImportBasicData.hwf</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ImportProductionData.hwf</from>
+      <to>Remove staging dos XML</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Remove staging dos XML</from>
+      <to>Remove blocos</to>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
       <enabled>Y</enabled>

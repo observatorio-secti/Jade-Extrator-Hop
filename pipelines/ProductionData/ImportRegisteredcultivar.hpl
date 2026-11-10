@@ -21,11 +21,6 @@
   </notepads>
   <order>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>LEITURA - CULTIVAR-REGISTRADA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>LEITURA - CULTIVAR-REGISTRADA</from>
       <to>SV - CULTIVAR-REGISTRADA</to>
       <enabled>Y</enabled>
@@ -86,16 +81,83 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>LEITURA - CULTIVAR-PROTEGIDA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>LEITURA - CULTIVAR-PROTEGIDA</from>
       <to>SV - CULTIVAR-REGISTRADA</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Blocos LEITURA - CULTIVAR-PROTEGIDA</from>
+      <to>LEITURA - CULTIVAR-PROTEGIDA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos LEITURA - CULTIVAR-REGISTRADA</from>
+      <to>LEITURA - CULTIVAR-REGISTRADA</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos LEITURA - CULTIVAR-PROTEGIDA</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>CULTIVAR\-PROTEGIDA_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>544</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos LEITURA - CULTIVAR-REGISTRADA</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>CULTIVAR\-REGISTRADA_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>448</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
   <transform>
     <name>CONSULTA - CULTIVAR-REGISTRADA</name>
     <type>TableInput</type>
@@ -239,7 +301,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -329,7 +391,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
       </field>
     </fields>
     <file>
@@ -340,7 +402,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-TECNICA/CULTIVAR-PROTEGIDA</loopxpath>
+    <loopxpath>/R/F/CULTIVAR-PROTEGIDA</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -369,7 +431,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -459,7 +521,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
       </field>
     </fields>
     <file>
@@ -470,7 +532,7 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-TECNICA/CULTIVAR-REGISTRADA</loopxpath>
+    <loopxpath>/R/F/CULTIVAR-REGISTRADA</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -508,43 +570,6 @@ LEFT JOIN researcher ON researcher.id = registered_cultivar.researcher_id</sql>
     <GUI>
       <xloc>1280</xloc>
       <yloc>240</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Leitura dos XML</name>
-    <type>GetFileNames</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <file>
-      <file_required>N</file_required>
-      <filemask>.*xml</filemask>
-      <include_subfolders>N</include_subfolders>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filefield>N</filefield>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <rownum>N</rownum>
-    <attributes/>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>400</yloc>
     </GUI>
   </transform>
   <transform>

@@ -18,6 +18,37 @@
     <modified_date>2023/04/24 11:13:43.951</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos CAPITULO-DE-LIVRO-PUBLICADO</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>CAPITULO\-DE\-LIVRO\-PUBLICADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>688</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Constant</type>
     <name>Add constants type</name>
     <fields>
@@ -180,30 +211,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>RowsFromResult</type>
-    <name>Get rows files xml</name>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>None</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>592</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>IfNull</type>
     <name>If Null</name>
     <fields>
@@ -346,7 +353,7 @@
     <rownum>N</rownum>
     <rownum_field/>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/LIVROS-E-CAPITULOS/CAPITULOS-DE-LIVROS-PUBLICADOS/CAPITULO-DE-LIVRO-PUBLICADO</loopxpath>
+    <loopxpath>/R/F/CAPITULO-DE-LIVRO-PUBLICADO</loopxpath>
     <fields>
       <field>
         <name>TITULO-DO-CAPITULO-DO-LIVRO</name>
@@ -650,7 +657,7 @@
       </field>
       <field>
         <name>NUMERO-IDENTIFICADOR</name>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -665,7 +672,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -694,7 +701,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -2183,42 +2190,6 @@ FROM "public".country
     </partitioning>
     <attributes/>
   </transform>
-  <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>496</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
   <order>
     <hop>
       <from>Add constants type</from>
@@ -2311,11 +2282,6 @@ FROM "public".country
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows files xml</from>
-      <to>Read XML Book Chapter</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Read XML Book Chapter</from>
       <to>Select values</to>
       <enabled>Y</enabled>
@@ -2381,7 +2347,7 @@ FROM "public".country
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos CAPITULO-DE-LIVRO-PUBLICADO</from>
       <to>Read XML Book Chapter</to>
       <enabled>Y</enabled>
     </hop>

@@ -151,36 +151,222 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML  Participção em congresso </to>
+      <from>Blocos Read XML  Outras Participção </from>
+      <to>Read XML  Outras Participção </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML  Participção Seminario </to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML  Participção Simposio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML  Participção Oficina </to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos Read XML  Participção Encontro </from>
       <to>Read XML  Participção Encontro </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML  Outras Participção </to>
+      <from>Blocos Read XML  Participção Oficina </from>
+      <to>Read XML  Participção Oficina </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML  Participção Seminario </from>
+      <to>Read XML  Participção Seminario </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML  Participção Simposio</from>
+      <to>Read XML  Participção Simposio</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML  Participção em congresso </from>
+      <to>Read XML  Participção em congresso </to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Outras Participção </name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>OUTRAS\-PARTICIPACOES\-EM\-EVENTOS\-CONGRESSOS_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>1056</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Participção Encontro </name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>PARTICIPACAO\-EM\-ENCONTRO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>960</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Participção Oficina </name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>PARTICIPACAO\-EM\-OFICINA_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>848</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Participção Seminario </name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>PARTICIPACAO\-EM\-SEMINARIO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>608</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Participção Simposio</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>PARTICIPACAO\-EM\-SIMPOSIO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>736</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML  Participção em congresso </name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>PARTICIPACAO\-EM\-CONGRESSO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>496</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
   <transform>
     <name>Dummy (already registered)</name>
     <type>Dummy</type>
@@ -225,43 +411,6 @@
     <GUI>
       <xloc>1920</xloc>
       <yloc>400</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Leitura dos XML</name>
-    <type>GetFileNames</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <file>
-      <file_required>N</file_required>
-      <filemask>.*xml</filemask>
-      <include_subfolders>N</include_subfolders>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filefield>N</filefield>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <rownum>N</rownum>
-    <attributes/>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>656</yloc>
     </GUI>
   </transform>
   <transform>
@@ -337,7 +486,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -442,7 +591,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -472,7 +621,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS</loopxpath>
+    <loopxpath>/R/F/OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -501,7 +650,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -606,7 +755,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -636,7 +785,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/PARTICIPACAO-EM-ENCONTRO</loopxpath>
+    <loopxpath>/R/F/PARTICIPACAO-EM-ENCONTRO</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -665,7 +814,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -770,7 +919,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -800,7 +949,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/PARTICIPACAO-EM-OFICINA</loopxpath>
+    <loopxpath>/R/F/PARTICIPACAO-EM-OFICINA</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -829,7 +978,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -934,7 +1083,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -964,7 +1113,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/PARTICIPACAO-EM-SEMINARIO</loopxpath>
+    <loopxpath>/R/F/PARTICIPACAO-EM-SEMINARIO</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -993,7 +1142,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -1098,7 +1247,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -1128,7 +1277,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/PARTICIPACAO-EM-SIMPOSIO</loopxpath>
+    <loopxpath>/R/F/PARTICIPACAO-EM-SIMPOSIO</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
@@ -1157,7 +1306,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -1262,7 +1411,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
       </field>
       <field>
         <currency/>
@@ -1292,7 +1441,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/PARTICIPACAO-EM-EVENTOS-CONGRESSOS/PARTICIPACAO-EM-CONGRESSO</loopxpath>
+    <loopxpath>/R/F/PARTICIPACAO-EM-CONGRESSO</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>

@@ -18,6 +18,37 @@
     <modified_date>2023/04/24 11:02:58.285</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos LIVRO-PUBLICADO-OU-ORGANIZADO</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>LIVRO\-PUBLICADO\-OU\-ORGANIZADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>32</xloc>
+      <yloc>448</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Constant</type>
     <name>Add constants type</name>
     <fields>
@@ -207,42 +238,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>496</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>MergeJoin</type>
     <name>Merge join</name>
     <join_type>INNER</join_type>
@@ -336,7 +331,7 @@
     <rownum>N</rownum>
     <rownum_field/>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/LIVROS-E-CAPITULOS/LIVROS-PUBLICADOS-OU-ORGANIZADOS/LIVRO-PUBLICADO-OU-ORGANIZADO</loopxpath>
+    <loopxpath>/R/F/LIVRO-PUBLICADO-OU-ORGANIZADO</loopxpath>
     <fields>
       <field>
         <name>TITULO-DO-LIVRO</name>
@@ -580,7 +575,7 @@
       </field>
       <field>
         <name>NUMERO-IDENTIFICADOR</name>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -610,7 +605,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -639,7 +634,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1865,7 +1860,7 @@ FROM "public".country
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos LIVRO-PUBLICADO-OU-ORGANIZADO</from>
       <to>Read XML Book </to>
       <enabled>Y</enabled>
     </hop>

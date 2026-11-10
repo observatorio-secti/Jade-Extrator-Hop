@@ -170,42 +170,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>32</xloc>
-      <yloc>544</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>MergeJoin</type>
     <name>Merge join City</name>
     <join_type>RIGHT OUTER</join_type>
@@ -281,218 +245,31 @@
     <attributes/>
   </transform>
   <transform>
-    <type>getXMLData</type>
+    <type>TableInput</type>
     <name>Read XML Researcher</name>
-    <file>
-      <name>${PROJECT_HOME}/metadata/dataset/xml/curriculos_xml/Teste/00131639579.xml</name>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <include>N</include>
-    <rownum>N</rownum>
+    <sql>SELECT nome_completo AS "NOME"
+, pais_de_nacionalidade AS "PAIS-DE-NACIONALIDADE"
+, orcid_id AS "ORCID"
+, cidade_nascimento AS "CIDADE-NASCIMENTO"
+, nome_em_citacoes_bibliograficas AS "NOME-EM-CITACOES-BIBLIOGRAFICAS"
+, resumo_cv_texto_resumo_cv_rh AS "RESUMO"
+, resumo_cv_texto_resumo_cv_rh_en AS "RESUMO-EN"
+, outras_informacoes_relevantes_outras_informacoes_relevantes AS "OUTRAS-INFORMACOES-RELEVANTES"
+, data_atualizacao AS "DATA-ATUALIZACAO"
+, hora_atualizacao AS "HORA-ATUALIZACAO"
+, numero_identificador AS "NUMERO-IDENTIFICADOR"
+, endereco_endereco_profissional_nome_instituicao_empresa AS "NOME-INSTITUICAO-EMPRESA"
+FROM hop_stg.lattes_cv</sql>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-GERAIS</loopxpath>
-    <fields>
-      <field>
-        <name>NOME</name>
-        <xPath>@NOME-COMPLETO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>PAIS-DE-NACIONALIDADE</name>
-        <xPath>@PAIS-DE-NACIONALIDADE</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>ORCID</name>
-        <xPath>@ORCID-ID</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CIDADE-NASCIMENTO</name>
-        <xPath>@CIDADE-NASCIMENTO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>NOME-EM-CITACOES-BIBLIOGRAFICAS</name>
-        <xPath>@NOME-EM-CITACOES-BIBLIOGRAFICAS</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RESUMO</name>
-        <xPath>RESUMO-CV/@TEXTO-RESUMO-CV-RH</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RESUMO-EN</name>
-        <xPath>RESUMO-CV/@TEXTO-RESUMO-CV-RH-EN</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>OUTRAS-INFORMACOES-RELEVANTES</name>
-        <xPath>OUTRAS-INFORMACOES-RELEVANTES/@OUTRAS-INFORMACOES-RELEVANTES</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>DATA-ATUALIZACAO</name>
-        <xPath>/CURRICULO-VITAE/@DATA-ATUALIZACAO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>HORA-ATUALIZACAO</name>
-        <xPath>/CURRICULO-VITAE/@HORA-ATUALIZACAO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>NUMERO-IDENTIFICADOR</name>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>NOME-INSTITUICAO-EMPRESA</name>
-        <xPath>ENDERECO/ENDERECO-PROFISSIONAL/@NOME-INSTITUICAO-EMPRESA</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <encoding>ISO-8859-1</encoding>
-    <XmlField>filename</XmlField>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>Y</IsAFile>
-    <addresultfile>N</addresultfile>
-    <namespaceaware>N</namespaceaware>
-    <validating>N</validating>
-    <usetoken>N</usetoken>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignorecomments>N</ignorecomments>
-    <readurl>N</readurl>
-    <distribute>N</distribute>
-    <copies>4</copies>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>ApplicationDB</connection>
+    <distribute>Y</distribute>
+    <copies>1</copies>
     <GUI>
       <xloc>208</xloc>
       <yloc>544</yloc>
     </GUI>
-    <description/>
     <partitioning>
       <method>none</method>
       <schema_name/>
@@ -1674,11 +1451,6 @@ FROM "public".researcher</sql>
     <hop>
       <from>Add constants</from>
       <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML Researcher</to>
       <enabled>Y</enabled>
     </hop>
     <hop>

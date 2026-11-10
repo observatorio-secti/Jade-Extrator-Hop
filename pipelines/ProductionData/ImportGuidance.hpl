@@ -18,6 +18,254 @@
     <modified_date>2023/06/17 01:18:09.246</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "Iniciação Científica-Andamento"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACAO\-EM\-ANDAMENTO\-DE\-INICIACAO\-CIENTIFICA_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>688</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "Pos-Doutorado-Andamento" 2</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACAO\-EM\-ANDAMENTO\-DE\-POS\-DOUTORADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>800</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "Pos-Doutorado-Andamento" 2 2</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACAO\-EM\-ANDAMENTO\-DE\-GRADUACAO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>896</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "doutorado-andamento"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACAO\-EM\-ANDAMENTO\-DE\-DOUTORADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>576</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "doutorado-concluída"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACOES\-CONCLUIDAS\-PARA\-DOUTORADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>256</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "mestrado-andamento"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACAO\-EM\-ANDAMENTO\-DE\-MESTRADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>464</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "mestrado-concluída"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ORIENTACOES\-CONCLUIDAS\-PARA\-MESTRADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>112</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos Read XML guidance "outras-concluída"</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>OUTRAS\-ORIENTACOES\-CONCLUIDAS_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>368</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Constant</type>
     <name>Add constants </name>
     <fields>
@@ -405,7 +653,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/ORIENTACOES-EM-ANDAMENTO/ORIENTACAO-EM-ANDAMENTO-DE-INICIACAO-CIENTIFICA</loopxpath>
+    <loopxpath>/R/F/ORIENTACAO-EM-ANDAMENTO-DE-INICIACAO-CIENTIFICA</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -469,7 +717,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -513,7 +761,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -553,7 +801,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/ORIENTACOES-EM-ANDAMENTO/ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO</loopxpath>
+    <loopxpath>/R/F/ORIENTACAO-EM-ANDAMENTO-DE-POS-DOUTORADO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -617,7 +865,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -661,7 +909,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -701,7 +949,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/ORIENTACOES-EM-ANDAMENTO/ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO</loopxpath>
+    <loopxpath>/R/F/ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -765,7 +1013,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -809,7 +1057,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -849,7 +1097,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/ORIENTACOES-EM-ANDAMENTO/ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO</loopxpath>
+    <loopxpath>/R/F/ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -913,7 +1161,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -957,7 +1205,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -997,7 +1245,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/OUTRA-PRODUCAO/ORIENTACOES-CONCLUIDAS/ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO</loopxpath>
+    <loopxpath>/R/F/ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -1061,7 +1309,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1105,7 +1353,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1145,7 +1393,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-COMPLEMENTARES/ORIENTACOES-EM-ANDAMENTO/ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO</loopxpath>
+    <loopxpath>/R/F/ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -1209,7 +1457,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1253,7 +1501,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1293,7 +1541,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/OUTRA-PRODUCAO/ORIENTACOES-CONCLUIDAS/ORIENTACOES-CONCLUIDAS-PARA-MESTRADO</loopxpath>
+    <loopxpath>/R/F/ORIENTACOES-CONCLUIDAS-PARA-MESTRADO</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -1357,7 +1605,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1401,7 +1649,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1441,7 +1689,7 @@
     <include>N</include>
     <rownum>N</rownum>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/OUTRA-PRODUCAO/ORIENTACOES-CONCLUIDAS/OUTRAS-ORIENTACOES-CONCLUIDAS</loopxpath>
+    <loopxpath>/R/F/OUTRAS-ORIENTACOES-CONCLUIDAS</loopxpath>
     <fields>
       <field>
         <name>TITULO</name>
@@ -1505,7 +1753,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -1549,7 +1797,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -3214,41 +3462,6 @@ FROM "public".researcher
     </partitioning>
     <attributes/>
   </transform>
-  <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>N</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>432</yloc>
-    </GUI>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
   <order>
     <hop>
       <from>Read XML guidance "mestrado-concluída"</from>
@@ -3531,43 +3744,43 @@ FROM "public".researcher
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML guidance "mestrado-concluída"</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML guidance "doutorado-concluída"</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML guidance "outras-concluída"</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML guidance "mestrado-andamento"</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML guidance "doutorado-andamento"</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos Read XML guidance "Iniciação Científica-Andamento"</from>
       <to>Read XML guidance "Iniciação Científica-Andamento"</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos Read XML guidance "Pos-Doutorado-Andamento" 2</from>
       <to>Read XML guidance "Pos-Doutorado-Andamento" 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos Read XML guidance "Pos-Doutorado-Andamento" 2 2</from>
       <to>Read XML guidance "Pos-Doutorado-Andamento" 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML guidance "doutorado-andamento"</from>
+      <to>Read XML guidance "doutorado-andamento"</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML guidance "doutorado-concluída"</from>
+      <to>Read XML guidance "doutorado-concluída"</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML guidance "mestrado-andamento"</from>
+      <to>Read XML guidance "mestrado-andamento"</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML guidance "mestrado-concluída"</from>
+      <to>Read XML guidance "mestrado-concluída"</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos Read XML guidance "outras-concluída"</from>
+      <to>Read XML guidance "outras-concluída"</to>
       <enabled>Y</enabled>
     </hop>
   </order>

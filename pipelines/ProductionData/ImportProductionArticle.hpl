@@ -18,6 +18,37 @@
     <modified_date>2023/04/26 11:06:13.311</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos ARTIGO-PUBLICADO</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>ARTIGO\-PUBLICADO_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>32</xloc>
+      <yloc>368</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Constant</type>
     <name>Acima de 2020</name>
     <fields>
@@ -160,42 +191,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>128</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>MergeJoin</type>
     <name>Merge join</name>
     <join_type>INNER</join_type>
@@ -239,7 +234,7 @@
     <rownum>N</rownum>
     <rownum_field/>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/ARTIGOS-PUBLICADOS/ARTIGO-PUBLICADO</loopxpath>
+    <loopxpath>/R/F/ARTIGO-PUBLICADO</loopxpath>
     <fields>
       <field>
         <name>SEQUENCIA-PRODUCAO</name>
@@ -393,7 +388,7 @@
       </field>
       <field>
         <name>PAIS-DO-ARTIGO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@PAIS-DE-NASCIMENTO</xPath>
+        <xPath>ancestor::F/@pais_de_nascimento</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -543,7 +538,7 @@
       </field>
       <field>
         <name>TITULO-DO-JORNAL-OU-REVISTA</name>
-        <xPath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/TEXTOS-EM-JORNAIS-OU-REVISTAS/TEXTO-EM-JORNAL-OU-REVISTA/DETALHAMENTO-DO-TEXTO/@TITULO-DO-JORNAL-OU-REVISTA</xPath>
+        <xPath>ancestor::F/@texto_titulo_jornal_ou_revista</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -558,7 +553,7 @@
       </field>
       <field>
         <name>ISSN-DO-JORNAL-OU-REVISTA</name>
-        <xPath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/TEXTOS-EM-JORNAIS-OU-REVISTAS/TEXTO-EM-JORNAL-OU-REVISTA/DETALHAMENTO-DO-TEXTO/@ISSN</xPath>
+        <xPath>ancestor::F/@texto_issn</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -573,7 +568,7 @@
       </field>
       <field>
         <name>NOME-COMPLETO</name>
-        <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
+        <xPath>ancestor::F/@nome_completo</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -587,7 +582,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1926,11 +1921,6 @@ ORDER BY issn, id;</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML ARTICLE </to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filtro de ano</from>
       <to>Acima de 2020</to>
       <enabled>Y</enabled>
@@ -2023,6 +2013,11 @@ ORDER BY issn, id;</sql>
     <hop>
       <from>Select values 6</from>
       <to>If Null 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocos ARTIGO-PUBLICADO</from>
+      <to>Read XML ARTICLE </to>
       <enabled>Y</enabled>
     </hop>
   </order>

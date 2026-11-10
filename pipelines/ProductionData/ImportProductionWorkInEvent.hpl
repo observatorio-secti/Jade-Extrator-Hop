@@ -18,6 +18,37 @@
     <modified_date>2025/06/08 12:21:19.743</modified_date>
   </info>
   <transform>
+    <type>GetFileNames</type>
+    <name>Blocos TRABALHO-EM-EVENTOS</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>TRABALHO\-EM\-EVENTOS_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>816</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Dummy</type>
     <name>Dummy (artigo already registered)</name>
     <distribute>Y</distribute>
@@ -87,66 +118,6 @@
     <attributes/>
   </transform>
   <transform>
-    <type>RowsFromResult</type>
-    <name>Get rows files xml</name>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>None</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>16</xloc>
-      <yloc>720</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
-    <type>GetFileNames</type>
-    <name>Leitura dos XML</name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-      <filemask>.*xml</filemask>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <rownum>N</rownum>
-    <filefield>N</filefield>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>592</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>MergeJoin</type>
     <name>Merge join 2</name>
     <join_type>LEFT OUTER</join_type>
@@ -190,7 +161,7 @@
     <rownum>N</rownum>
     <rownum_field/>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-BIBLIOGRAFICA/TRABALHOS-EM-EVENTOS/TRABALHO-EM-EVENTOS</loopxpath>
+    <loopxpath>/R/F/TRABALHO-EM-EVENTOS</loopxpath>
     <fields>
       <field>
         <name>CLASSIFICACAO-DO-EVENTO</name>
@@ -404,7 +375,7 @@
       </field>
       <field>
         <name>NUMERO-IDENTIFICADOR</name>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
         <type>None</type>
         <length>-1</length>
         <format/>
@@ -448,7 +419,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
@@ -1104,11 +1075,6 @@ ORDER BY bp.title</sql>
   </transform>
   <order>
     <hop>
-      <from>Get rows files xml</from>
-      <to>Read XML Work_in_event </to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Read XML Work_in_event </from>
       <to>Filter rows 2</to>
       <enabled>Y</enabled>
@@ -1169,13 +1135,13 @@ ORDER BY bp.title</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML Work_in_event </to>
+      <from>Filter rows Book Chapter</from>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows Book Chapter</from>
-      <to>Select values 2</to>
+      <from>Blocos TRABALHO-EM-EVENTOS</from>
+      <to>Read XML Work_in_event </to>
       <enabled>Y</enabled>
     </hop>
   </order>

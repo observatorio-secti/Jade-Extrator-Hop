@@ -91,11 +91,42 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
+      <from>Blocos DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL</from>
       <to>Read XML Participação em projeto</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>DESENVOLVIMENTO\-DE\-MATERIAL\-DIDATICO\-OU\-INSTRUCIONAL_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>704</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
   <transform>
     <name>Dummy (do nothing)</name>
     <type>Dummy</type>
@@ -167,43 +198,6 @@
     </GUI>
   </transform>
   <transform>
-    <name>Leitura dos XML</name>
-    <type>GetFileNames</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <file>
-      <file_required>N</file_required>
-      <filemask>.*xml</filemask>
-      <include_subfolders>N</include_subfolders>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filefield>N</filefield>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <rownum>N</rownum>
-    <attributes/>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>528</yloc>
-    </GUI>
-  </transform>
-  <transform>
     <name>Merge join</name>
     <type>MergeJoin</type>
     <description/>
@@ -272,7 +266,7 @@
     <XmlField>filename</XmlField>
     <addresultfile>N</addresultfile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <currency/>
@@ -287,7 +281,7 @@
         <result_type>valueof</result_type>
         <trim_type>none</trim_type>
         <type>None</type>
-        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <xPath>ancestor::F/@numero_identificador</xPath>
       </field>
       <field>
         <currency/>
@@ -373,7 +367,7 @@
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-TECNICA/DEMAIS-TIPOS-DE-PRODUCAO-TECNICA/DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL</loopxpath>
+    <loopxpath>/R/F/DESENVOLVIMENTO-DE-MATERIAL-DIDATICO-OU-INSTRUCIONAL</loopxpath>
     <namespaceaware>N</namespaceaware>
     <readurl>N</readurl>
     <rownum>N</rownum>
