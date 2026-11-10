@@ -454,19 +454,53 @@
     <attributes/>
   </transform>
   <transform>
-    <type>Delete</type>
-    <name>Delete</name>
-    <lookup>
-      <key>
-        <name>researcher_id</name>
-        <field>researcher_id</field>
-        <condition>=</condition>
-      </key>
-      <schema>"public"</schema>
-      <table>education</table>
-    </lookup>
+    <type>FieldsChangeSequence</type>
+    <name>Sequência por pesquisador</name>
+    <fields>
+      <field>
+        <name>NUMERO-IDENTIFICADOR</name>
+      </field>
+    </fields>
+    <increment>1</increment>
+    <resultfieldName>researcher_row_seq</resultfieldName>
+    <start>1</start>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1936</xloc>
+      <yloc>336</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>ExecSql</type>
+    <name>Apagar formações do pesquisador</name>
     <connection>ApplicationDB</connection>
-    <commit>100</commit>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DELETE FROM "public".education
+WHERE ? = 1
+  AND researcher_id = (SELECT id FROM "public".researcher WHERE lattes_id = ?)</sql>
+    <set_params>Y</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>researcher_row_seq</name>
+      </argument>
+      <argument>
+        <name>lattes_id</name>
+      </argument>
+    </arguments>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -1949,16 +1983,6 @@ FROM researcher</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Quem é esse pesquisador?</from>
-      <to>Delete</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Delete</from>
-      <to>Inserindo dados</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocos DOUTORADO</from>
       <to>DOUTORADO</to>
       <enabled>Y</enabled>
@@ -1981,6 +2005,21 @@ FROM researcher</sql>
     <hop>
       <from>Blocos MESTRADO-PROFISSIONALIZANTE</from>
       <to>MESTRADO-PROFISSIONALIZANTE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Quem é esse pesquisador?</from>
+      <to>Sequência por pesquisador</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sequência por pesquisador</from>
+      <to>Apagar formações do pesquisador</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Apagar formações do pesquisador</from>
+      <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
   </order>

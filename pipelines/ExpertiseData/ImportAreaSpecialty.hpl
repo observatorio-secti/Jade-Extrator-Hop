@@ -76,7 +76,7 @@
         <conditions/>
       </condition>
     </compare>
-    <send_true_to>Group by</send_true_to>
+    <send_true_to>Select table </send_true_to>
     <send_false_to>Dummy (area_specialtyo  aready exists)</send_false_to>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -109,37 +109,6 @@
     <GUI>
       <xloc>512</xloc>
       <yloc>512</yloc>
-    </GUI>
-    <description/>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
-    <type>GroupBy</type>
-    <name>Group by</name>
-    <all_rows>N</all_rows>
-    <directory>${java.io.tmpdir}</directory>
-    <prefix>grp</prefix>
-    <ignore_aggregate>N</ignore_aggregate>
-    <group>
-      <field>
-        <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
-      </field>
-      <field>
-        <name>NOME-DA-ESPECIALIDADE</name>
-      </field>
-    </group>
-    <fields/>
-    <add_linenr>N</add_linenr>
-    <give_back_row>N</give_back_row>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>1264</xloc>
-      <yloc>208</yloc>
     </GUI>
     <description/>
     <partitioning>
@@ -199,11 +168,13 @@
     <name>Merge join  specialty</name>
     <join_type>RIGHT OUTER</join_type>
     <transform1>Sort rows</transform1>
-    <transform2>Sort by Area do Conhecimento</transform2>
+    <transform2>Sort rows 3</transform2>
     <keys_1>
+      <key>specialty_sub_area_id</key>
       <key>area_specialty_name</key>
     </keys_1>
     <keys_2>
+      <key>sub_area_expertise_id</key>
       <key>NOME-DA-ESPECIALIDADE</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -224,11 +195,15 @@
     <name>Merge join 2 2</name>
     <join_type>INNER</join_type>
     <transform1>Sort rows 2</transform1>
-    <transform2>Sort rows 3</transform2>
+    <transform2>Sort by Area do Conhecimento</transform2>
     <keys_1>
+      <key>sub_area_great_area_name</key>
+      <key>sub_area_area_name</key>
       <key>sub_area_expertise_name</key>
     </keys_1>
     <keys_2>
+      <key>NOME-GRANDE-AREA-DO-CONHECIMENTO</key>
+      <key>NOME-DA-AREA-DO-CONHECIMENTO</key>
       <key>NOME-DA-SUB-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -261,6 +236,36 @@
     <limit>0</limit>
     <loopxpath>/R/F/AREA-DE-ATUACAO</loopxpath>
     <fields>
+      <field>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
+        <xPath>@NOME-GRANDE-AREA-DO-CONHECIMENTO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>NOME-DA-AREA-DO-CONHECIMENTO</name>
+        <xPath>@NOME-DA-AREA-DO-CONHECIMENTO</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
       <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
         <xPath>@NOME-DA-SUB-AREA-DO-CONHECIMENTO</xPath>
@@ -322,6 +327,16 @@
     <name>Select Area_Expertise</name>
     <fields>
       <field>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>NOME-DA-AREA-DO-CONHECIMENTO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
         <length>-2</length>
         <precision>-2</precision>
@@ -362,6 +377,12 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>sub_area_expertise_id</name>
+        <rename>specialty_sub_area_id</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -390,6 +411,18 @@
       <field>
         <name>name</name>
         <rename>sub_area_expertise_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>area_name</name>
+        <rename>sub_area_area_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>great_area_name</name>
+        <rename>sub_area_great_area_name</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -442,6 +475,30 @@
     <name>Sort by Area do Conhecimento</name>
     <fields>
       <field>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>NOME-DA-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>NOME-DA-ESPECIALIDADE</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -453,7 +510,7 @@
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -472,6 +529,14 @@
     <type>SortRows</type>
     <name>Sort rows</name>
     <fields>
+      <field>
+        <name>specialty_sub_area_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>area_specialty_name</name>
         <ascending>Y</ascending>
@@ -504,6 +569,22 @@
     <name>Sort rows 2</name>
     <fields>
       <field>
+        <name>sub_area_great_area_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>sub_area_area_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>sub_area_expertise_name</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
@@ -535,7 +616,15 @@
     <name>Sort rows 3</name>
     <fields>
       <field>
-        <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
+        <name>sub_area_expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>NOME-DA-ESPECIALIDADE</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -591,6 +680,19 @@
         <pad_len/>
         <pad_char/>
       </field>
+      <field>
+        <in_stream_name>NOME-DA-AREA-DO-CONHECIMENTO</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>lower</lower_upper>
+        <init_cap>yes</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+        <padding_type>none</padding_type>
+        <pad_len/>
+        <pad_char/>
+      </field>
     </fields>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -608,12 +710,11 @@
   <transform>
     <type>TableInput</type>
     <name>Table area_specialty</name>
-    <sql>SELECT DISTINCT ON ("name")
+    <sql>SELECT
   id
 , "name"
 , sub_area_expertise_id
-FROM "public".area_specialty
-ORDER BY "name", id;</sql>
+FROM "public".area_specialty;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -636,12 +737,15 @@ ORDER BY "name", id;</sql>
   <transform>
     <type>TableInput</type>
     <name>Table sub_area_expertise</name>
-    <sql>SELECT DISTINCT ON ("name")
-  id
-, "name"
-, area_expertise_id
-FROM "public".sub_area_expertise
-ORDER BY "name", id;</sql>
+    <sql>SELECT DISTINCT ON (g."name", a."name", s."name")
+  s.id
+, s."name"
+, a."name" AS area_name
+, g."name" AS great_area_name
+FROM "public".sub_area_expertise s
+JOIN "public".area_expertise a ON a.id = s.area_expertise_id
+LEFT JOIN "public".great_area_expertise g ON g.id = a.great_area_expertise_id
+ORDER BY g."name", a."name", s."name", s.id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -668,11 +772,6 @@ ORDER BY "name", id;</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Group by</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filter rows 2</from>
       <to>Select Area_Expertise</to>
       <enabled>Y</enabled>
@@ -680,11 +779,6 @@ ORDER BY "name", id;</sql>
     <hop>
       <from>Merge join  specialty</from>
       <to>Filter rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2 2</from>
-      <to>Select table </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -700,11 +794,6 @@ ORDER BY "name", id;</sql>
     <hop>
       <from>Select table </from>
       <to>Insert table area_specialty</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort by Area do Conhecimento</from>
-      <to>Merge join  specialty</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -743,18 +832,28 @@ ORDER BY "name", id;</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Group by</from>
+      <from>Blocos AREA-DE-ATUACAO</from>
+      <to>Read XML Area_specialty</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort by Area do Conhecimento</from>
+      <to>Merge join 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2 2</from>
       <to>Sort rows 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Sort rows 3</from>
-      <to>Merge join 2 2</to>
+      <to>Merge join  specialty</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocos AREA-DE-ATUACAO</from>
-      <to>Read XML Area_specialty</to>
+      <from>Filter rows</from>
+      <to>Select table </to>
       <enabled>Y</enabled>
     </hop>
   </order>

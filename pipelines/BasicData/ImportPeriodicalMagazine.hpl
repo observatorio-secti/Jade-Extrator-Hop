@@ -479,6 +479,130 @@ FROM "public".periodical_magazine
     <attributes/>
   </transform>
   <transform>
+    <type>SortRows</type>
+    <name>Ordenar por ISSN e título</name>
+    <fields>
+      <field>
+        <name>issn</name>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <directory>${java.io.tmpdir}</directory>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <compress>N</compress>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1248</xloc>
+      <yloc>384</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>GroupBy</type>
+    <name>Contar títulos por ISSN</name>
+    <all_rows>N</all_rows>
+    <directory>${java.io.tmpdir}</directory>
+    <prefix>grp</prefix>
+    <ignore_aggregate>N</ignore_aggregate>
+    <group>
+      <field>
+        <name>issn</name>
+      </field>
+      <field>
+        <name>name</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>name_count</aggregate>
+        <subject>name</subject>
+        <type>COUNT_ANY</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <add_linenr>N</add_linenr>
+    <give_back_row>N</give_back_row>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1376</xloc>
+      <yloc>384</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>SortRows</type>
+    <name>Título mais frequente primeiro</name>
+    <fields>
+      <field>
+        <name>issn</name>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>name_count</name>
+        <ascending>N</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <directory>${java.io.tmpdir}</directory>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <compress>N</compress>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1504</xloc>
+      <yloc>384</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Unique</type>
     <name>Unique rows</name>
     <count_rows>N</count_rows>
@@ -588,11 +712,6 @@ FROM "public".periodical_magazine
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 4</from>
-      <to>Unique rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Unique rows</from>
       <to>Table insert periodical_magazine</to>
       <enabled>Y</enabled>
@@ -600,6 +719,26 @@ FROM "public".periodical_magazine
     <hop>
       <from>Blocos ARTIGO-PUBLICADO</from>
       <to>Read XML REVISTA </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 4</from>
+      <to>Ordenar por ISSN e título</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Ordenar por ISSN e título</from>
+      <to>Contar títulos por ISSN</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Contar títulos por ISSN</from>
+      <to>Título mais frequente primeiro</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Título mais frequente primeiro</from>
+      <to>Unique rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>

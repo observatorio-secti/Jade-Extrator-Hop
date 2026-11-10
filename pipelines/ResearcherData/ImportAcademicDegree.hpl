@@ -55,10 +55,10 @@
     <transform1>Sort researcher </transform1>
     <transform2>Sort rows</transform2>
     <keys_1>
-      <key>researcher_name</key>
+      <key>lattes_id</key>
     </keys_1>
     <keys_2>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -238,6 +238,21 @@
         <group/>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <xPath>ancestor::F/@numero_identificador</xPath>
+        <type>None</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <encoding>UTF-8</encoding>
     <XmlField>filename</XmlField>
@@ -283,7 +298,7 @@
         <precision>-2</precision>
       </field>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -313,8 +328,7 @@
         <precision>-2</precision>
       </field>
       <field>
-        <name>name</name>
-        <rename>researcher_name</rename>
+        <name>lattes_id</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -367,6 +381,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -416,7 +435,7 @@
     <name>Sort researcher </name>
     <fields>
       <field>
-        <name>researcher_name</name>
+        <name>lattes_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -447,7 +466,7 @@
     <name>Sort rows</name>
     <fields>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -540,9 +559,8 @@
     <name>Table researcher </name>
     <sql>SELECT
             id
-            , "name"
-            FROM "public".researcher
-</sql>
+            , lattes_id
+            FROM "public".researcher</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>

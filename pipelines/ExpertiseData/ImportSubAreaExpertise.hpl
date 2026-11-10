@@ -201,9 +201,11 @@
     <transform1>Sort sub_area_expertise of db</transform1>
     <transform2>Sort  Sub-area-expertise of xml </transform2>
     <keys_1>
+      <key>sub_expertise_area_id</key>
       <key>sub_expetise_name</key>
     </keys_1>
     <keys_2>
+      <key>expertise_id</key>
       <key>NOME-DA-SUB-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -226,9 +228,11 @@
     <transform1>Sort rows</transform1>
     <transform2>Sort by Area_expertise of xml</transform2>
     <keys_1>
+      <key>expertise_great_area_name</key>
       <key>expertise_name</key>
     </keys_1>
     <keys_2>
+      <key>NOME-GRANDE-AREA-DO-CONHECIMENTO</key>
       <key>NOME-DA-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
@@ -374,6 +378,12 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>great_area_name</name>
+        <rename>expertise_great_area_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -401,6 +411,12 @@
       <field>
         <name>name</name>
         <rename>sub_expetise_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>area_expertise_id</name>
+        <rename>sub_expertise_area_id</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -454,7 +470,7 @@
     <name>SelectSub-Area_Expertise of xml</name>
     <fields>
       <field>
-        <name>NUMERO-IDENTIFICADOR</name>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -465,11 +481,6 @@
       </field>
       <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>
-      <field>
-        <name>SEQUENCIA-AREA-DE-ATUACAO</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -492,6 +503,14 @@
     <type>SortRows</type>
     <name>Sort  Sub-area-expertise of xml </name>
     <fields>
+      <field>
+        <name>expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
         <ascending>Y</ascending>
@@ -524,7 +543,23 @@
     <name>Sort by Area_expertise of xml</name>
     <fields>
       <field>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>NOME-DA-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -535,7 +570,7 @@
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -554,6 +589,14 @@
     <type>SortRows</type>
     <name>Sort rows</name>
     <fields>
+      <field>
+        <name>expertise_great_area_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>expertise_name</name>
         <ascending>Y</ascending>
@@ -585,6 +628,14 @@
     <type>SortRows</type>
     <name>Sort sub_area_expertise of db</name>
     <fields>
+      <field>
+        <name>sub_expertise_area_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>sub_expetise_name</name>
         <ascending>Y</ascending>
@@ -659,11 +710,13 @@
   <transform>
     <type>TableInput</type>
     <name>Table Area_Expertise</name>
-    <sql>SELECT DISTINCT ON ("name")
-  id
-, "name"
-FROM "public".area_expertise
-ORDER BY "name", id;</sql>
+    <sql>SELECT DISTINCT ON (g."name", a."name")
+  a.id
+, a."name"
+, g."name" AS great_area_name
+FROM "public".area_expertise a
+LEFT JOIN "public".great_area_expertise g ON g.id = a.great_area_expertise_id
+ORDER BY g."name", a."name", a.id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -686,11 +739,11 @@ ORDER BY "name", id;</sql>
   <transform>
     <type>TableInput</type>
     <name>Table sub_area_expertise</name>
-    <sql>SELECT DISTINCT ON ("name")
+    <sql>SELECT
   id
 , "name"
-FROM "public".great_area_expertise
-ORDER BY "name", id;</sql>
+, area_expertise_id
+FROM "public".sub_area_expertise;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>

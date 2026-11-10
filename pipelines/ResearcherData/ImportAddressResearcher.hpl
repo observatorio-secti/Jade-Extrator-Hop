@@ -255,10 +255,10 @@
     <transform1>Sort rows 2</transform1>
     <transform2>Sort rows</transform2>
     <keys_1>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_1>
     <keys_2>
-      <key>name</key>
+      <key>lattes_id</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -590,6 +590,11 @@
         <precision>-2</precision>
       </field>
       <field>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
         <name>FLAG-DE-PREFERENCIA</name>
         <length>-2</length>
         <precision>-2</precision>
@@ -885,7 +890,7 @@
     <name>Sort rows</name>
     <fields>
       <field>
-        <name>name</name>
+        <name>lattes_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -916,7 +921,7 @@
     <name>Sort rows 2</name>
     <fields>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>

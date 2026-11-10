@@ -1446,7 +1446,7 @@ FROM "public".periodical_magazine</sql>
   , qualis
   , reference_period
 FROM "public".periodical_magazine
-ORDER BY issn, id;</sql>
+ORDER BY issn, reference_period DESC NULLS LAST, "name", id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
