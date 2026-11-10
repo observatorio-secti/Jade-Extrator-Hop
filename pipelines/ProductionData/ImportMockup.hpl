@@ -31,11 +31,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML Participação em projeto</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join</from>
       <to>Sort rows 4</to>
       <enabled>Y</enabled>
@@ -100,7 +95,43 @@
       <to>Select values 4</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Blocos MAQUETE</from>
+      <to>Read XML Participação em projeto</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <transform>
+    <type>GetFileNames</type>
+    <name>Blocos MAQUETE</name>
+    <file>
+      <name>${java.io.tmpdir}/jade_xml_staging/</name>
+      <filemask>MAQUETE_[0-9]+\.xml</filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <rownum>N</rownum>
+    <filefield>N</filefield>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <isaddresult>N</isaddresult>
+    <limit>0</limit>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>624</yloc>
+    </GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
   <transform>
     <name>Dummy (do nothing)</name>
     <type>Dummy</type>
@@ -145,43 +176,6 @@
     <GUI>
       <xloc>1664</xloc>
       <yloc>528</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Leitura dos XML</name>
-    <type>GetFileNames</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <file>
-      <file_required>N</file_required>
-      <filemask>.*xml</filemask>
-      <include_subfolders>N</include_subfolders>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
-    </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <filefield>N</filefield>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <isaddresult>Y</isaddresult>
-    <limit>0</limit>
-    <raiseAnExceptionIfNoFile>N</raiseAnExceptionIfNoFile>
-    <rownum>N</rownum>
-    <attributes/>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>416</yloc>
     </GUI>
   </transform>
   <transform>
@@ -261,7 +255,7 @@
     <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
     <rownum_field/>
-    <encoding>ISO-8859-1</encoding>
+    <encoding>UTF-8</encoding>
     <file>
       <name>${PROJECT_HOME}/datasets/lattes_xml/curriculos_xml/Teste/00131639579.xml</name>
       <filemask/>
@@ -272,7 +266,7 @@
     <fields>
       <field>
         <name>NUMERO-IDENTIFICADOR</name>
-        <xpath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xpath>
+        <xpath>ancestor::F/@numero_identificador</xpath>
         <element_type>node</element_type>
         <result_type>valueof</result_type>
         <type>None</type>
@@ -422,7 +416,7 @@
       </field>
     </fields>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/PRODUCAO-TECNICA/DEMAIS-TIPOS-DE-PRODUCAO-TECNICA/MAQUETE</loopxpath>
+    <loopxpath>/R/F/MAQUETE</loopxpath>
     <IsInFields>Y</IsInFields>
     <IsAFile>Y</IsAFile>
     <XmlField>filename</XmlField>

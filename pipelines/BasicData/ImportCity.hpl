@@ -304,98 +304,23 @@
     <attributes/>
   </transform>
   <transform>
-    <type>getXMLData</type>
+    <type>TableInput</type>
     <name>Read XML city </name>
-    <file>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/curriculos_xml/Teste/00125693567.xml</name>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <include>N</include>
-    <rownum>N</rownum>
+    <sql>SELECT pais_de_nascimento AS "PAIS-DE-NACIONALIDADE"
+, cidade_nascimento AS "CIDADE-NASCIMENTO"
+, uf_nascimento AS "UF"
+, sigla_pais_nacionalidade AS "SIGLA-PAIS-NACIONALIDADE:"
+FROM hop_stg.lattes_cv</sql>
     <limit>0</limit>
-    <loopxpath>/CURRICULO-VITAE/DADOS-GERAIS</loopxpath>
-    <fields>
-      <field>
-        <name>PAIS-DE-NACIONALIDADE</name>
-        <xPath>@PAIS-DE-NASCIMENTO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CIDADE-NASCIMENTO</name>
-        <xPath>@CIDADE-NASCIMENTO</xPath>
-        <type>String</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>UF</name>
-        <xPath>@UF-NASCIMENTO</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>SIGLA-PAIS-NACIONALIDADE:</name>
-        <xPath>@SIGLA-PAIS-NACIONALIDADE</xPath>
-        <type>None</type>
-        <length>-1</length>
-        <format/>
-        <trim_type>none</trim_type>
-        <element_type>node</element_type>
-        <result_type>valueof</result_type>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <encoding>ISO-8859-1</encoding>
-    <XmlField>filename</XmlField>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>Y</IsAFile>
-    <addresultfile>N</addresultfile>
-    <namespaceaware>N</namespaceaware>
-    <validating>N</validating>
-    <usetoken>N</usetoken>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignorecomments>N</ignorecomments>
-    <readurl>N</readurl>
-    <distribute>N</distribute>
-    <copies>4</copies>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <connection>ApplicationDB</connection>
+    <distribute>Y</distribute>
+    <copies>1</copies>
     <GUI>
       <xloc>304</xloc>
       <yloc>464</yloc>
     </GUI>
-    <description/>
     <partitioning>
       <method>none</method>
       <schema_name/>
@@ -1144,22 +1069,6 @@ FROM "public".country
     <attributes/>
   </transform>
   <transform>
-    <type>RowsFromResult</type>
-    <name>Get rows from result</name>
-    <fields/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>464</yloc>
-    </GUI>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-  </transform>
-  <transform>
     <type>Dummy</type>
     <name>Dummy (do nothing)</name>
     <distribute>Y</distribute>
@@ -1348,11 +1257,6 @@ FROM "public".country
     <hop>
       <from>Filter rows 3</from>
       <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get rows from result</from>
-      <to>Read XML city </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
