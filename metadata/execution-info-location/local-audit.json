@@ -1,0 +1,13 @@
+{
+  "executionInfoLocation": {
+    "local-folder": {
+      "pluginName": "File location",
+      "pluginId": "local-folder",
+      "rootFolder": "${PROJECT_HOME}/logs/executions/"
+    }
+  },
+  "dataLoggingDelay": "2000",
+  "name": "local-audit",
+  "description": "Persiste logs e metricas por transform sem amostragem de linhas (dataProfile desativado)",
+  "dataLoggingInterval": "5000"
+}
