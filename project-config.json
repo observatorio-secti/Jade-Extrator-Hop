@@ -11,9 +11,6 @@
     "variables" : [ {
       "name" : "DATABASE_URL",
       "value" : "jdbc:postgresql://localhost:5432/simcc_write?user=postgres&password=postgres"
-    }, {
-      "name" : "ADMIN_DATABASE_URL",
-      "value" : "jdbc:postgresql://localhost:5472/npai_admin?user=postgres&password=postgres"
     } ]
   }
 }
