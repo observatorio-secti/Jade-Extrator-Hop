@@ -1182,16 +1182,5 @@ ORDER BY bp.title</sql>
   <notepads/>
   <attributes/>
   <transform_error_handling>
-    <error>
-      <source_transform>Table output</source_transform>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename>error_row</nr_valuename>
-      <descriptions_valuename>error_description</descriptions_valuename>
-      <fields_valuename/>
-      <codes_valuename>error_code</codes_valuename>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </transform_error_handling>
 </pipeline>
