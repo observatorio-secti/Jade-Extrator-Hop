@@ -134,86 +134,6 @@
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
-    <action>
-      <filename>${PROJECT_HOME}/pipelines/Seeding/ImportGroups.hpl</filename>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <create_parent_folder>N</create_parent_folder>
-      <set_logfile>N</set_logfile>
-      <set_append_logfile>N</set_append_logfile>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <wait_until_finished>Y</wait_until_finished>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <run_configuration>local</run_configuration>
-      <name>ImportGroups.hpl</name>
-      <description/>
-      <type>PIPELINE</type>
-      <attributes/>
-      <xloc>496</xloc>
-      <yloc>224</yloc>
-      <parallel>N</parallel>
-      <attributes_hac/>
-    </action>
-    <action>
-      <filename>${PROJECT_HOME}/pipelines/Seeding/ImportResearchLines.hpl</filename>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <create_parent_folder>N</create_parent_folder>
-      <set_logfile>N</set_logfile>
-      <set_append_logfile>N</set_append_logfile>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <wait_until_finished>Y</wait_until_finished>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <run_configuration>local</run_configuration>
-      <name>ImportResearchLines.hpl</name>
-      <description/>
-      <type>PIPELINE</type>
-      <attributes/>
-      <xloc>336</xloc>
-      <yloc>224</yloc>
-      <parallel>N</parallel>
-      <attributes_hac/>
-    </action>
-    <action>
-      <url>http://ftp.cnpq.br/pub/Gestao_BI/DGP/Linhas%20de%20Pesquisa/Censo%202023%20linhas%20de%20pesquisa.csv</url>
-      <targetfilename>${PROJECT_HOME}/datasets/research_lines.csv</targetfilename>
-      <file_appended>N</file_appended>
-      <date_time_added>N</date_time_added>
-      <targetfilename_extension/>
-      <uploadfilename/>
-      <url_fieldname/>
-      <upload_fieldname/>
-      <dest_fieldname/>
-      <run_every_row>N</run_every_row>
-      <ignore_ssl>N</ignore_ssl>
-      <proxy_host/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <username/>
-      <password>Encrypted </password>
-      <addfilenameresult>Y</addfilenameresult>
-      <headers/>
-      <name>HTTP</name>
-      <description/>
-      <type>HTTP</type>
-      <attributes/>
-      <xloc>640</xloc>
-      <yloc>224</yloc>
-      <parallel>N</parallel>
-      <attributes_hac/>
-    </action>
   </actions>
   <hops>
     <hop>
@@ -240,27 +160,6 @@
     <hop>
       <from>ImportJCR.hpl</from>
       <to>ImportQualis.hpl</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ImportQualis.hpl</from>
-      <to>HTTP</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>HTTP</from>
-      <to>ImportGroups.hpl</to>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ImportGroups.hpl</from>
-      <to>ImportResearchLines.hpl</to>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
       <enabled>Y</enabled>

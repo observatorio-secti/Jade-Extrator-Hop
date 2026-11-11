@@ -21,11 +21,6 @@
   </notepads>
   <order>
     <hop>
-      <from>Normalize</from>
-      <to>Inserindo dados</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>GET qualis-2017-2020</from>
       <to>column 2017-2020</to>
       <enabled>Y</enabled>
@@ -53,6 +48,36 @@
     <hop>
       <from>Unique Magazine</from>
       <to>Normalize</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Normalize</from>
+      <to>Sort Qualis Normalized</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table periodical_magazine</from>
+      <to>Sort DB periodical_magazine</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort Qualis Normalized</from>
+      <to>Merge join periodical_magazine</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort DB periodical_magazine</from>
+      <to>Merge join periodical_magazine</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join periodical_magazine</from>
+      <to>Filter novos periodicos</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter novos periodicos</from>
+      <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -391,6 +416,181 @@
     </GUI>
   </transform>
   <transform>
+    <name>Sort Qualis Normalized</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>ISSN</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>Título</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>reference_period</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Table periodical_magazine</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <execute_each_row>N</execute_each_row>
+    <limit>0</limit>
+    <sql>SELECT DISTINCT issn AS db_issn, "name" AS db_name, reference_period AS db_reference_period, '1' AS db_exists FROM "public".periodical_magazine WHERE reference_period IS NOT NULL</sql>
+    <variables_active>N</variables_active>
+    <attributes/>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>368</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort DB periodical_magazine</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_issn</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_name</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_reference_period</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>368</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Merge join periodical_magazine</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <keys_1>
+      <key>ISSN</key>
+      <key>Título</key>
+      <key>reference_period</key>
+    </keys_1>
+    <keys_2>
+      <key>db_issn</key>
+      <key>db_name</key>
+      <key>db_reference_period</key>
+    </keys_2>
+    <transform1>Sort Qualis Normalized</transform1>
+    <transform2>Sort DB periodical_magazine</transform2>
+    <attributes/>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Filter novos periodicos</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compare>
+      <condition>
+        <conditions/>
+        <function>IS NULL</function>
+        <leftvalue>db_exists</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
+      </condition>
+    </compare>
+    <send_true_to>Inserindo dados</send_true_to>
+    <attributes/>
+    <GUI>
+      <xloc>1344</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
     <name>Inserindo dados</name>
     <type>TableOutput</type>
     <description/>
@@ -444,7 +644,7 @@
     <use_batch>Y</use_batch>
     <attributes/>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>1504</xloc>
       <yloc>224</yloc>
     </GUI>
   </transform>
