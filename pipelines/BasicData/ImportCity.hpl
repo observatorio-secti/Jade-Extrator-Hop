@@ -1365,14 +1365,6 @@ FROM "public".country
   <attributes/>
   <transform_error_handling>
     <error>
-      <source_transform>Insert table city</source_transform>
-      <target_transform>Dummy (do nothing)</target_transform>
-      <is_enabled>N</is_enabled>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
       <source_transform>Unique rows</source_transform>
       <target_transform>Dummy (do nothing)</target_transform>
       <is_enabled>Y</is_enabled>
