@@ -681,9 +681,9 @@
       <field>
         <name>SEQUENCIA-PRODUCAO</name>
         <xPath>@SEQUENCIA-PRODUCAO</xPath>
-        <type>None</type>
+        <type>Integer</type>
         <length>-1</length>
-        <format/>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -1820,7 +1820,7 @@
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>

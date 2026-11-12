@@ -146,10 +146,10 @@
     <transform1>Sort researcher </transform1>
     <transform2>Sort rows</transform2>
     <keys_1>
-      <key>researcher_name</key>
+      <key>lattes_id</key>
     </keys_1>
     <keys_2>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -287,11 +287,26 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>SEQUENCIA-PRODUCAO</name>
-        <xPath>@SEQUENCIA-PRODUCAO</xPath>
-        <type>None</type>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <type>String</type>
         <length>-1</length>
         <format/>
+        <trim_type>none</trim_type>
+        <element_type>Node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <xPath>@SEQUENCIA-PRODUCAO</xPath>
+        <type>Integer</type>
+        <length>-1</length>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -349,6 +364,11 @@
       <field>
         <name>name</name>
         <rename>researcher_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>lattes_id</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -476,7 +496,7 @@
     <name>Sort researcher </name>
     <fields>
       <field>
-        <name>researcher_name</name>
+        <name>lattes_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -507,7 +527,7 @@
     <name>Sort rows</name>
     <fields>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -553,6 +573,14 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>sequence_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
@@ -577,7 +605,23 @@
     <name>Sort rows titulo</name>
     <fields>
       <field>
+        <name>researcher _id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>TITULO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -588,7 +632,7 @@
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -783,6 +827,7 @@ FROM "public".event_organization
     <sql>SELECT
   id
 , "name"
+, lattes_id
 FROM "public".researcher
 </sql>
     <limit>0</limit>
