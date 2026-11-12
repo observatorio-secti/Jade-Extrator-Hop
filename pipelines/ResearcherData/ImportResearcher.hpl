@@ -69,6 +69,32 @@
     <attributes/>
   </transform>
   <transform>
+    <type>Constant</type>
+    <name>Add constant update_abstract</name>
+    <fields>
+      <field>
+        <nullif>1</nullif>
+        <name>update_abstract</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1968</xloc>
+      <yloc>320</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Dummy</type>
     <name>Dummy (researcher já cadastrado)</name>
     <distribute>Y</distribute>
@@ -1089,6 +1115,10 @@ FROM "public".city
         <stream_name>country_id</stream_name>
         <column_name>country_id</column_name>
       </field>
+      <field>
+        <stream_name>update_abstract</stream_name>
+        <column_name>update_abstract</column_name>
+      </field>
     </fields>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1442,6 +1472,17 @@ FROM "public".researcher</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
         <roundingType>half_even</roundingType>
       </meta>
+      <meta>
+        <name>update_abstract</name>
+        <rename>update_abstract</rename>
+        <type>Boolean</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <storage_type/>
+        <date_format_lenient>N</date_format_lenient>
+        <lenient_string_to_number>N</lenient_string_to_number>
+        <roundingType>half_even</roundingType>
+      </meta>
     </fields>
     <distribute>N</distribute>
     <copies>1</copies>
@@ -1618,6 +1659,11 @@ FROM "public".researcher</sql>
     </hop>
     <hop>
       <from>convert date to string </from>
+      <to>Add constant update_abstract</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constant update_abstract</from>
       <to>format date and select fields to input </to>
       <enabled>Y</enabled>
     </hop>
