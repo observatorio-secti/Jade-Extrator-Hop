@@ -837,7 +837,7 @@ FROM researcher</sql>
   <transform>
     <type>TableInput</type>
     <name>Buscando projetos antigos</name>
-    <sql>SELECT start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db, sequence_code
+    <sql>SELECT id AS project_id_db, start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db, sequence_code
 FROM research_project</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -994,6 +994,7 @@ FROM research_project</sql>
       </condition>
     </compare>
     <send_true_to>Normalizando</send_true_to>
+    <send_false_to>Atualizando dados</send_false_to>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -1077,8 +1078,81 @@ FROM research_project</sql>
       <to>Normalizando</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Removendo já cadastrados</from>
+      <to>Atualizando dados</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <notepads/>
   <attributes/>
   <transform_error_handling/>
+  <transform>
+    <name>Atualizando dados</name>
+    <type>Update</type>
+    <description />
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <commit>1000</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <lookup>
+      <schema>"public"</schema>
+      <table>research_project</table>
+      <key>
+        <name>project_id_db</name>
+        <field>id</field>
+        <condition>=</condition>
+      </key>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+      <value>
+        <name>end_year</name>
+        <rename>end_year</rename>
+      </value>
+      <value>
+        <name>nature</name>
+        <rename>nature</rename>
+      </value>
+      <value>
+        <name>agency_code</name>
+        <rename>agency_code</rename>
+      </value>
+      <value>
+        <name>agency_name</name>
+        <rename>agency_name</rename>
+      </value>
+      <value>
+        <name>number_undergraduates</name>
+        <rename>number_undergraduates</rename>
+      </value>
+      <value>
+        <name>number_specialists</name>
+        <rename>number_specialists</rename>
+      </value>
+      <value>
+        <name>number_academic_masters</name>
+        <rename>number_academic_masters</rename>
+      </value>
+      <value>
+        <name>number_phd</name>
+        <rename>number_phd</rename>
+      </value>
+      <value>
+        <name>description</name>
+        <rename>description</rename>
+      </value>
+    </lookup>
+    <GUI>
+      <xloc>1840</xloc>
+      <yloc>464</yloc>
+    </GUI>
+  </transform>
 </pipeline>
