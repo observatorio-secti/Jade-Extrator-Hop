@@ -128,14 +128,14 @@
   <transform>
     <type>MergeJoin</type>
     <name>Merge join researcher </name>
-    <join_type>RIGHT OUTER</join_type>
+    <join_type>INNER</join_type>
     <transform1>Sort researcher </transform1>
     <transform2>Sort rows</transform2>
     <keys_1>
-      <key>researcher_name</key>
+      <key>lattes_id</key>
     </keys_1>
     <keys_2>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -265,6 +265,21 @@
         <repeat>N</repeat>
       </field>
       <field>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+        <type>String</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>Node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>NOME-COMPLETO</name>
         <xPath>/CURRICULO-VITAE/DADOS-GERAIS/@NOME-COMPLETO</xPath>
         <type>None</type>
@@ -372,6 +387,11 @@
       <field>
         <name>name</name>
         <rename>researcher_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>lattes_id</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>
@@ -523,7 +543,7 @@
     <name>Sort researcher </name>
     <fields>
       <field>
-        <name>researcher_name</name>
+        <name>lattes_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -554,7 +574,7 @@
     <name>Sort rows</name>
     <fields>
       <field>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -824,6 +844,7 @@
     <sql>SELECT
   id
 , "name"
+, lattes_id
 FROM "public".researcher
 </sql>
     <limit>0</limit>
