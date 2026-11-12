@@ -381,10 +381,12 @@
     <keys_1>
       <key>TITULO-DO-TEXTO</key>
       <key>NOME-COMPLETO</key>
+      <key>SEQUENCIA-PRODUCAO</key>
     </keys_1>
     <keys_2>
       <key>title</key>
       <key>name</key>
+      <key>sequence_code</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -621,9 +623,9 @@
       <field>
         <name>SEQUENCIA-PRODUCAO</name>
         <xPath>@SEQUENCIA-PRODUCAO</xPath>
-        <type>None</type>
+        <type>Integer</type>
         <length>-1</length>
-        <format/>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -1459,7 +1461,7 @@
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>

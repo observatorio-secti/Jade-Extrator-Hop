@@ -207,9 +207,11 @@
     <transform2>Sort  Sub-area-expertise of xml </transform2>
     <keys_1>
       <key>sub_expetise_name</key>
+      <key>area_expertise_id</key>
     </keys_1>
     <keys_2>
       <key>NOME-DA-SUB-AREA-DO-CONHECIMENTO</key>
+      <key>expertise_id</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -409,6 +411,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>area_expertise_id</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -499,6 +506,14 @@
     <fields>
       <field>
         <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>expertise_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -598,6 +613,14 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>area_expertise_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
@@ -691,11 +714,12 @@ ORDER BY "name", id;</sql>
   <transform>
     <type>TableInput</type>
     <name>Table sub_area_expertise</name>
-    <sql>SELECT DISTINCT ON ("name")
+    <sql>SELECT DISTINCT ON ("name", area_expertise_id)
   id
 , "name"
-FROM "public".great_area_expertise
-ORDER BY "name", id;</sql>
+, area_expertise_id
+FROM "public".sub_area_expertise
+ORDER BY "name", area_expertise_id, id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>

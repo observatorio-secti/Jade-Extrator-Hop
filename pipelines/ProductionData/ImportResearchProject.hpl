@@ -292,9 +292,9 @@
       <field>
         <name>SEQUENCIA-PROJETO</name>
         <xPath>@SEQUENCIA-PROJETO</xPath>
-        <type>None</type>
+        <type>Integer</type>
         <length>-1</length>
-        <format/>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -763,7 +763,7 @@ FROM researcher</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -795,7 +795,7 @@ FROM researcher</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -837,7 +837,7 @@ FROM researcher</sql>
   <transform>
     <type>TableInput</type>
     <name>Buscando projetos antigos</name>
-    <sql>SELECT start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db, sequence_code
+    <sql>SELECT id AS project_id_db, start_year AS start_year_db, project_name AS project_name_db, researcher_id AS researcher_id_db, sequence_code
 FROM research_project</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -890,7 +890,7 @@ FROM research_project</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -938,7 +938,7 @@ FROM research_project</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -993,8 +993,8 @@ FROM research_project</sql>
         <conditions/>
       </condition>
     </compare>
-    <send_true_to>Normalizando</send_true_to>
-    <distribute>Y</distribute>
+    <send_true_to>Inserindo dados</send_true_to>
+    <send_false_to>Atualizando dados</send_false_to>    <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
       <xloc>1840</xloc>
@@ -1023,7 +1023,17 @@ FROM research_project</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Merge join</from>
+      <to>Normalizando</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Normalizando</from>
+      <to>Ordenando campos XML</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Removendo já cadastrados</from>
       <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
@@ -1053,11 +1063,6 @@ FROM research_project</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join</from>
-      <to>Ordenando campos XML</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Ordenando campos XML</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
@@ -1074,11 +1079,83 @@ FROM research_project</sql>
     </hop>
     <hop>
       <from>Removendo já cadastrados</from>
-      <to>Normalizando</to>
+      <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
-  </order>
+    <hop>
+      <from>Removendo já cadastrados</from>
+      <to>Atualizando dados</to>
+      <enabled>Y</enabled>
+    </hop>  </order>
   <notepads/>
   <attributes/>
   <transform_error_handling/>
+  <transform>
+    <name>Atualizando dados</name>
+    <type>Update</type>
+    <description />
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <commit>1000</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <lookup>
+      <schema>"public"</schema>
+      <table>research_project</table>
+      <key>
+        <name>project_id_db</name>
+        <field>id</field>
+        <condition>=</condition>
+      </key>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+      <value>
+        <name>end_year</name>
+        <rename>end_year</rename>
+      </value>
+      <value>
+        <name>nature</name>
+        <rename>nature</rename>
+      </value>
+      <value>
+        <name>agency_code</name>
+        <rename>agency_code</rename>
+      </value>
+      <value>
+        <name>agency_name</name>
+        <rename>agency_name</rename>
+      </value>
+      <value>
+        <name>number_undergraduates</name>
+        <rename>number_undergraduates</rename>
+      </value>
+      <value>
+        <name>number_specialists</name>
+        <rename>number_specialists</rename>
+      </value>
+      <value>
+        <name>number_academic_masters</name>
+        <rename>number_academic_masters</rename>
+      </value>
+      <value>
+        <name>number_phd</name>
+        <rename>number_phd</rename>
+      </value>
+      <value>
+        <name>description</name>
+        <rename>description</rename>
+      </value>
+    </lookup>
+    <GUI>
+      <xloc>1840</xloc>
+      <yloc>464</yloc>
+    </GUI>
+  </transform>
 </pipeline>

@@ -317,9 +317,9 @@
       <field>
         <name>SEQUENCIA-PRODUCAO</name>
         <xPath>@SEQUENCIA-PRODUCAO</xPath>
-        <type>None</type>
+        <type>Integer</type>
         <length>-1</length>
-        <format/>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -630,11 +630,19 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>SEQUENCIA-PRODUCAO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
     <copies>1</copies>

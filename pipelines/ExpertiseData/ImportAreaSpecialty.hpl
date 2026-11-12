@@ -454,6 +454,14 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>NOME-DA-SUB-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
@@ -613,12 +621,12 @@
   <transform>
     <type>TableInput</type>
     <name>Table area_specialty</name>
-    <sql>SELECT DISTINCT ON ("name")
+    <sql>SELECT DISTINCT ON ("name", sub_area_expertise_id)
   id
 , "name"
 , sub_area_expertise_id
 FROM "public".area_specialty
-ORDER BY "name", id;</sql>
+ORDER BY "name", sub_area_expertise_id, id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>

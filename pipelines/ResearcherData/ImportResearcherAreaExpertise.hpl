@@ -1146,7 +1146,7 @@
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -1241,7 +1241,7 @@
     <sort_prefix>srt</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -1330,12 +1330,12 @@
   <transform>
     <type>TableInput</type>
     <name>Table Sub Area Expertise</name>
-    <sql>SELECT
+    <sql>SELECT DISTINCT ON ("name", area_expertise_id)
   id
 , "name"
 , area_expertise_id
-
 FROM "public".sub_area_expertise
+ORDER BY "name", area_expertise_id, id;
 </sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -1357,12 +1357,12 @@ FROM "public".sub_area_expertise
   <transform>
     <type>TableInput</type>
     <name>Table area_expertise </name>
-    <sql>SELECT
+    <sql>SELECT DISTINCT ON ("name", great_area_expertise_id)
   id
 , "name"
-
 , great_area_expertise_id
 FROM "public".area_expertise
+ORDER BY "name", great_area_expertise_id, id;
 </sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -1384,12 +1384,12 @@ FROM "public".area_expertise
   <transform>
     <type>TableInput</type>
     <name>Table area_specialty</name>
-    <sql>SELECT
+    <sql>SELECT DISTINCT ON ("name", sub_area_expertise_id)
   id
 , "name"
 , sub_area_expertise_id
-
 FROM "public".area_specialty
+ORDER BY "name", sub_area_expertise_id, id;
 </sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
@@ -1411,11 +1411,11 @@ FROM "public".area_specialty
   <transform>
     <type>TableInput</type>
     <name>Table great_area_expertise</name>
-    <sql>SELECT
+    <sql>SELECT DISTINCT ON ("name")
   id
 , "name"
-
 FROM "public".great_area_expertise
+ORDER BY "name", id;
 </sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
