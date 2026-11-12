@@ -553,8 +553,23 @@ FROM "public".periodical_magazine
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Criar Revista Sentinela</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>String operations 2</from>
+      <to>Filtro ISSN Valido</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filtro ISSN Valido</from>
       <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filtro ISSN Valido</from>
+      <to>Dummy (periodical ja cadatrado)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -591,4 +606,97 @@ FROM "public".periodical_magazine
   <notepads/>
   <attributes/>
   <transform_error_handling/>
+  <transform>
+    <name>Criar Revista Sentinela</name>
+    <type>RowGenerator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <length>-1</length>
+        <name>TITULO-DO-PERIODICO-OU-REVISTA</name>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <type>String</type>
+        <nullif>Não Informado</nullif>
+      </field>
+      <field>
+        <length>-1</length>
+        <name>ISSN</name>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <type>String</type>
+        <nullif>00000000</nullif>
+      </field>
+      <field>
+        <length>-1</length>
+        <name>QUALIS</name>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <type>String</type>
+        <nullif>SQ</nullif>
+      </field>
+    </fields>
+    <interval_in_ms>5000</interval_in_ms>
+    <last_time_field />
+    <never_ending>N</never_ending>
+    <limit>1</limit>
+    <row_time_field />
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>128</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Filtro ISSN Valido</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>Value mapper</send_true_to>
+    <send_false_to>Dummy (periodical ja cadatrado)</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <operator>-</operator>
+            <leftvalue>ISSN</leftvalue>
+            <function>IS NOT NULL</function>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>ISSN</leftvalue>
+            <function>&lt;&gt;</function>
+            <value>
+              <name>constant</name>
+              <type>String</type>
+              <text />
+              <length>-1</length>
+              <precision>-1</precision>
+              <isnull>N</isnull>
+              <mask />
+            </value>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>256</yloc>
+    </GUI>
+  </transform>
 </pipeline>

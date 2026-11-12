@@ -114,6 +114,11 @@
         <value>Periódico Não Identificado</value>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>ISSN</name>
+        <value>00000000</value>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <valuetypes/>
     <selectFields>Y</selectFields>
@@ -1892,6 +1897,11 @@ ORDER BY issn, id;</sql>
     </hop>
     <hop>
       <from>String operations</from>
+      <to>Mapear ISSN Nulo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Mapear ISSN Nulo</from>
       <to>Sort  Article </to>
       <enabled>Y</enabled>
     </hop>
@@ -2029,4 +2039,28 @@ ORDER BY issn, id;</sql>
   <notepads/>
   <attributes/>
   <transform_error_handling/>
+  <transform>
+    <type>ValueMapper</type>
+    <name>Mapear ISSN Nulo</name>
+    <field_to_use>ISSN</field_to_use>
+    <fields>
+      <field>
+        <source_value />
+        <target_value>00000000</target_value>
+        <empty_string_equals_null>Y</empty_string_equals_null>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>272</yloc>
+    </GUI>
+    <description />
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <attributes />
+  </transform>
 </pipeline>
