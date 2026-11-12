@@ -22,7 +22,7 @@
   <order>
     <hop>
       <from>Filter rows 2</from>
-      <to>Dummy (already registered)</to>
+      <to>Update participation_events</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -219,7 +219,7 @@
         <operator>-</operator>
       </condition>
     </compare>
-    <send_false_to>Dummy (already registered)</send_false_to>
+    <send_false_to>Update participation_events</send_false_to>
     <send_true_to>Select values</send_true_to>
     <attributes/>
     <GUI>
@@ -2433,4 +2433,52 @@ FROM "public".researcher
   <transform_error_handling>
   </transform_error_handling>
   <attributes/>
+  <transform>
+    <name>Update participation_events</name>
+    <type>Update</type>
+    <description />
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <commit>1000</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <lookup>
+      <schema>"public"</schema>
+      <table>participation_events</table>
+      <key>
+        <name>id</name>
+        <field>id</field>
+        <condition>=</condition>
+      </key>
+      <value>
+        <name>nature</name>
+        <rename>nature</rename>
+      </value>
+      <value>
+        <name>form_participation</name>
+        <rename>form_participation</rename>
+      </value>
+      <value>
+        <name>type_participation</name>
+        <rename>type_participation</rename>
+      </value>
+      <value>
+        <name>year</name>
+        <rename>year</rename>
+      </value>
+      <value>
+        <name>sequence_code</name>
+        <rename>sequence_code</rename>
+      </value>
+    </lookup>
+    <GUI>
+      <xloc>2288</xloc>
+      <yloc>544</yloc>
+    </GUI>
+  </transform>
 </pipeline>

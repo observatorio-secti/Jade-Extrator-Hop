@@ -254,7 +254,7 @@
       </condition>
     </compare>
     <send_true_to>Select insert table</send_true_to>
-    <send_false_to>Dummy (already registered)</send_false_to>
+    <send_false_to>Update guidance</send_false_to>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -2902,7 +2902,8 @@
     <type>TableInput</type>
     <name>Table input Guidance</name>
     <sql>SELECT
- researcher_id
+ id
+, researcher_id
 , title
 FROM "public".guidance
 </sql>
@@ -3477,7 +3478,7 @@ FROM "public".researcher
     </hop>
     <hop>
       <from>Filter rows 2</from>
-      <to>Dummy (already registered)</to>
+      <to>Update guidance</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -3574,4 +3575,56 @@ FROM "public".researcher
   <notepads/>
   <attributes/>
   <transform_error_handling/>
+  <transform>
+    <name>Update guidance</name>
+    <type>Update</type>
+    <description />
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <commit>1000</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <lookup>
+      <schema>"public"</schema>
+      <table>guidance</table>
+      <key>
+        <name>id</name>
+        <field>id</field>
+        <condition>=</condition>
+      </key>
+      <value>
+        <name>nature</name>
+        <rename>NATUREZA</rename>
+      </value>
+      <value>
+        <name>oriented</name>
+        <rename>NOME-DO-ORIENTADO</rename>
+      </value>
+      <value>
+        <name>type</name>
+        <rename>TIPO-DE-ORIENTACAO</rename>
+      </value>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+      <value>
+        <name>year</name>
+        <rename>ANO</rename>
+      </value>
+      <value>
+        <name>sequence_code</name>
+        <rename>SEQUENCIA-PRODUCAO</rename>
+      </value>
+    </lookup>
+    <GUI>
+      <xloc>2528</xloc>
+      <yloc>448</yloc>
+    </GUI>
+  </transform>
 </pipeline>
