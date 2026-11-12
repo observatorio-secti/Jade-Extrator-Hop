@@ -142,7 +142,7 @@
   <transform>
     <type>MergeJoin</type>
     <name>Merge join researcher </name>
-    <join_type>RIGHT OUTER</join_type>
+    <join_type>INNER</join_type>
     <transform1>Sort researcher </transform1>
     <transform2>Sort rows</transform2>
     <keys_1>

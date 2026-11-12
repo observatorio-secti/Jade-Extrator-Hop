@@ -305,12 +305,12 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>RIGHT OUTER</join_type>
+    <join_type>INNER</join_type>
     <keys_1>
-      <key>researcher_name</key>
+      <key>lattes_id</key>
     </keys_1>
     <keys_2>
-      <key>NOME-COMPLETO</key>
+      <key>NUMERO-IDENTIFICADOR</key>
     </keys_2>
     <transform1>Sort researcher </transform1>
     <transform2>Sort rows</transform2>
@@ -428,6 +428,21 @@
         <trim_type>none</trim_type>
         <type>None</type>
         <xPath>DADOS-BASICOS-DE-OUTRAS-PARTICIPACOES-EM-EVENTOS-CONGRESSOS/@NATUREZA</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
       </field>
       <field>
         <currency/>
@@ -600,6 +615,21 @@
         <format/>
         <group/>
         <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
         <name>NOME-COMPLETO</name>
         <precision>-1</precision>
         <repeat>N</repeat>
@@ -756,6 +786,21 @@
         <trim_type>none</trim_type>
         <type>None</type>
         <xPath>DADOS-BASICOS-DA-PARTICIPACAO-EM-OFICINA/@NATUREZA</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
       </field>
       <field>
         <currency/>
@@ -928,6 +973,21 @@
         <format/>
         <group/>
         <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
         <name>NOME-COMPLETO</name>
         <precision>-1</precision>
         <repeat>N</repeat>
@@ -1084,6 +1144,21 @@
         <trim_type>none</trim_type>
         <type>None</type>
         <xPath>DADOS-BASICOS-DA-PARTICIPACAO-EM-SIMPOSIO/@NATUREZA</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
       </field>
       <field>
         <currency/>
@@ -1256,6 +1331,21 @@
         <format/>
         <group/>
         <length>-1</length>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <xPath>/CURRICULO-VITAE/@NUMERO-IDENTIFICADOR</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format/>
+        <group/>
+        <length>-1</length>
         <name>NOME-COMPLETO</name>
         <precision>-1</precision>
         <repeat>N</repeat>
@@ -1327,6 +1417,11 @@
         <name>name</name>
         <precision>-2</precision>
         <rename>researcher_name</rename>
+      </field>
+      <field>
+        <length>-2</length>
+        <name>lattes_id</name>
+        <precision>-2</precision>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1458,7 +1553,7 @@
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
         <collator_strength>0</collator_strength>
-        <name>researcher_name</name>
+        <name>lattes_id</name>
         <presorted>N</presorted>
       </field>
     </fields>
@@ -1489,7 +1584,7 @@
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
         <collator_strength>0</collator_strength>
-        <name>NOME-COMPLETO</name>
+        <name>NUMERO-IDENTIFICADOR</name>
         <presorted>N</presorted>
       </field>
     </fields>
@@ -2350,6 +2445,7 @@ FROM "public".participation_events
     <sql>SELECT
   id
 , "name"
+, lattes_id
 FROM "public".researcher
 </sql>
     <variables_active>N</variables_active>
