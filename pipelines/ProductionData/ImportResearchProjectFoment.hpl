@@ -21,9 +21,9 @@
   </notepads>
   <order>
     <hop>
-      <from>Get rows files xml</from>
+      <from>Leitura dos XML</from>
       <to>Read XML Participação em projeto</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Read XML Participação em projeto</from>
@@ -33,6 +33,21 @@
     <hop>
       <from>Select values</from>
       <to>Filter rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>String operations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>String operations</from>
+      <to>Sort Nome do projeto</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -51,128 +66,41 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>String operations</from>
-      <to>Sort Nome do projeto</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows</from>
-      <to>String operations</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows</from>
-      <to>Dummy (do nothing)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values 2</from>
+      <to>Select project_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select project_id</from>
+      <to>Sort project_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort project_id</from>
+      <to>LIMPANDO DADOS ANTIGOS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Blocking all rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking all rows</from>
+      <to>Wait for Delete</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Wait for Delete</from>
       <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>Leitura dos XML</from>
-      <to>Read XML Participação em projeto</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table output</from>
-      <to>Dummy (do nothing) 2</to>
-      <enabled>Y</enabled>
-    </hop>
   </order>
-  <transform>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <GUI>
-      <xloc>1136</xloc>
-      <yloc>288</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compare>
-      <condition>
-        <conditions>
-          <condition>
-            <conditions>
-</conditions>
-            <function>IS NOT NULL</function>
-            <leftvalue>NOME-INSTITUICAO</leftvalue>
-            <negated>N</negated>
-            <operator>-</operator>
-          </condition>
-          <condition>
-            <conditions>
-</conditions>
-            <function>IS NOT NULL</function>
-            <leftvalue>CODIGO-INSTITUICAO</leftvalue>
-            <negated>N</negated>
-            <operator>OR</operator>
-          </condition>
-        </conditions>
-        <function>IS NOT NULL</function>
-        <leftvalue>NOME-INSTITUICAO</leftvalue>
-        <negated>N</negated>
-        <operator>-</operator>
-      </condition>
-    </compare>
-    <send_false_to>Dummy (do nothing)</send_false_to>
-    <send_true_to>String operations</send_true_to>
-    <attributes/>
-    <GUI>
-      <xloc>1136</xloc>
-      <yloc>432</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Get rows files xml</name>
-    <type>RowsFromResult</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>filename</name>
-        <type>None</type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>288</yloc>
-    </GUI>
-  </transform>
   <transform>
     <name>Leitura dos XML</name>
     <type>GetFileNames</type>
@@ -192,10 +120,6 @@
       <include_subfolders>N</include_subfolders>
       <name>${PROJECT_HOME}/datasets/lattes_xml/</name>
     </file>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
     <filefield>N</filefield>
     <filter>
       <filterfiletype>all_files</filterfiletype>
@@ -206,58 +130,8 @@
     <rownum>N</rownum>
     <attributes/>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>464</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <keys_1>
-      <key>NOME-DO-PROJETO</key>
-      <key>NUMERO-IDENTIFICADOR</key>
-    </keys_1>
-    <keys_2>
-      <key>project_name</key>
-      <key>lattes_id</key>
-    </keys_2>
-    <transform1>Sort Nome do projeto</transform1>
-    <transform2>Sort Nome do projeto 2</transform2>
-    <attributes/>
-    <GUI>
-      <xloc>1664</xloc>
+      <xloc>160</xloc>
       <yloc>432</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Projetos existentes</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>ApplicationDB</connection>
-    <execute_each_row>N</execute_each_row>
-    <limit>0</limit>
-    <sql>SELECT rp.id, project_name, r.lattes_id FROM research_project rp, researcher r WHERE r.id = rp.researcher_id</sql>
-    <variables_active>N</variables_active>
-    <attributes/>
-    <GUI>
-      <xloc>1664</xloc>
-      <yloc>128</yloc>
     </GUI>
   </transform>
   <transform>
@@ -354,12 +228,37 @@
         <type>None</type>
         <xPath>@NATUREZA</xPath>
       </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format>#</format>
+        <group/>
+        <length>-1</length>
+        <name>SEQUENCIA-PROJETO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>Integer</type>
+        <xPath>../../@SEQUENCIA-PROJETO</xPath>
+      </field>
+      <field>
+        <currency/>
+        <decimal/>
+        <element_type>node</element_type>
+        <format>#</format>
+        <group/>
+        <length>-1</length>
+        <name>ANO-INICIO</name>
+        <precision>-1</precision>
+        <repeat>N</repeat>
+        <result_type>valueof</result_type>
+        <trim_type>none</trim_type>
+        <type>Integer</type>
+        <xPath>../../@ANO-INICIO</xPath>
+      </field>
     </fields>
-    <file>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name>${PROJECT_HOME}/datasets/lattes_xml/curriculos_xml/Teste/00131639579.xml</name>
-    </file>
     <ignorecomments>N</ignorecomments>
     <include>N</include>
     <limit>0</limit>
@@ -371,7 +270,7 @@
     <validating>N</validating>
     <attributes/>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>352</xloc>
       <yloc>432</yloc>
     </GUI>
   </transform>
@@ -412,11 +311,279 @@
         <name>NATUREZA</name>
         <precision>-2</precision>
       </field>
+      <field>
+        <length>-2</length>
+        <name>SEQUENCIA-PROJETO</name>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <length>-2</length>
+        <name>ANO-INICIO</name>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>528</xloc>
+      <yloc>432</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compare>
+      <condition>
+        <conditions>
+          <condition>
+            <conditions/>
+            <function>IS NOT NULL</function>
+            <leftvalue>NOME-INSTITUICAO</leftvalue>
+            <negated>N</negated>
+            <operator>-</operator>
+          </condition>
+          <condition>
+            <conditions/>
+            <function>IS NOT NULL</function>
+            <leftvalue>CODIGO-INSTITUICAO</leftvalue>
+            <negated>N</negated>
+            <operator>OR</operator>
+          </condition>
+        </conditions>
+        <function>IS NOT NULL</function>
+        <leftvalue>NOME-INSTITUICAO</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
+      </condition>
+    </compare>
+    <send_false_to>Dummy (do nothing)</send_false_to>
+    <send_true_to>String operations</send_true_to>
+    <attributes/>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>432</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>288</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>String operations</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>NOME-DO-PROJETO</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>yes</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>432</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort Nome do projeto</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>NUMERO-IDENTIFICADOR</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>NOME-DO-PROJETO</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>SEQUENCIA-PROJETO</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>ANO-INICIO</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>432</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Projetos existentes</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <execute_each_row>N</execute_each_row>
+    <limit>0</limit>
+    <sql>SELECT r.lattes_id, rp.id AS project_id, rp.project_name, rp.sequence_code, rp.start_year
+FROM research_project rp
+INNER JOIN researcher r ON rp.researcher_id = r.id</sql>
+    <variables_active>N</variables_active>
+    <attributes/>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>208</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort Nome do projeto 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>lattes_id</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>project_name</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>sequence_code</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>start_year</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_size>1000000</sort_size>
+    <unique_rows>Y</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>208</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <keys_1>
+      <key>NUMERO-IDENTIFICADOR</key>
+      <key>NOME-DO-PROJETO</key>
+      <key>SEQUENCIA-PROJETO</key>
+      <key>ANO-INICIO</key>
+    </keys_1>
+    <keys_2>
+      <key>lattes_id</key>
+      <key>project_name</key>
+      <key>sequence_code</key>
+      <key>start_year</key>
+    </keys_2>
+    <transform1>Sort Nome do projeto</transform1>
+    <transform2>Sort Nome do projeto 2</transform2>
+    <attributes/>
+    <GUI>
+      <xloc>1216</xloc>
       <yloc>432</yloc>
     </GUI>
   </transform>
@@ -424,7 +591,7 @@
     <name>Select values 2</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -452,20 +619,42 @@
       </field>
       <field>
         <length>-2</length>
-        <name>id</name>
+        <name>project_id</name>
         <precision>-2</precision>
-        <rename>project_id</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <GUI>
-      <xloc>1856</xloc>
+      <xloc>1392</xloc>
       <yloc>432</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>Sort Nome do projeto</name>
+    <name>Select project_id</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>project_id</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1552</xloc>
+      <yloc>304</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort project_id</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -475,37 +664,29 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compress>N</compress>
     <directory>${java.io.tmpdir}</directory>
     <fields>
       <field>
+        <name>project_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
         <collator_strength>0</collator_strength>
-        <name>NOME-DO-PROJETO</name>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <name>NUMERO-IDENTIFICADOR</name>
         <presorted>N</presorted>
       </field>
     </fields>
+    <sort_prefix>srt</sort_prefix>
     <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <attributes/>
     <GUI>
-      <xloc>1488</xloc>
-      <yloc>432</yloc>
+      <xloc>1712</xloc>
+      <yloc>304</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>Sort Nome do projeto 2</name>
-    <type>SortRows</type>
+    <name>LIMPANDO DADOS ANTIGOS</name>
+    <type>Delete</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -514,37 +695,26 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compress>N</compress>
-    <directory>${java.io.tmpdir}</directory>
-    <fields>
-      <field>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <name>project_name</name>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <name>lattes_id</name>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <sort_size>1000000</sort_size>
-    <unique_rows>N</unique_rows>
+    <commit>1000</commit>
+    <connection>ApplicationDB</connection>
+    <lookup>
+      <key>
+        <condition>=</condition>
+        <field>project_id</field>
+        <name>project_id</name>
+      </key>
+      <schema>"public"</schema>
+      <table>research_project_foment</table>
+    </lookup>
     <attributes/>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>272</yloc>
+      <xloc>1888</xloc>
+      <yloc>304</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>String operations</name>
-    <type>StringOperations</type>
+    <name>Blocking all rows</name>
+    <type>BlockingTransform</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -553,77 +723,38 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>NUMERO-IDENTIFICADOR</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-      <field>
-        <in_stream_name>NOME-DO-PROJETO</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-      <field>
-        <in_stream_name>CODIGO-INSTITUICAO</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-      <field>
-        <in_stream_name>NOME-INSTITUICAO</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-      <field>
-        <in_stream_name>NATUREZA</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
+    <directory>${java.io.tmpdir}</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <pass_all_rows>Y</pass_all_rows>
     <attributes/>
     <GUI>
-      <xloc>1312</xloc>
-      <yloc>432</yloc>
+      <xloc>1552</xloc>
+      <yloc>544</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Wait for Delete</name>
+    <type>BlockUntilTransformsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <transforms>
+      <transform>
+        <name>LIMPANDO DADOS ANTIGOS</name>
+        <CopyNr>0</CopyNr>
+      </transform>
+    </transforms>
+    <attributes/>
+    <GUI>
+      <xloc>1712</xloc>
+      <yloc>544</yloc>
     </GUI>
   </transform>
   <transform>
@@ -677,40 +808,11 @@
     <use_batch>Y</use_batch>
     <attributes/>
     <GUI>
-      <xloc>2048</xloc>
-      <yloc>432</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Dummy (do nothing) 2</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <GUI>
-      <xloc>2048</xloc>
-      <yloc>304</yloc>
+      <xloc>1888</xloc>
+      <yloc>544</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
-    <error>
-      <source_transform>Table output</source_transform>
-      <target_transform>Dummy (do nothing) 2</target_transform>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </transform_error_handling>
   <attributes/>
 </pipeline>
