@@ -4,32 +4,38 @@ services:
     environment:
       HOP_PROJECT_NAME: Jade-Extrator
       HOP_PROJECT_FOLDER: /files/jade-extrator
-      HOP_LOG_LEVEL: ${HOP_LOG_LEVEL}
+      HOP_LOG_LEVEL: ${HOP_LOG_LEVEL:-Basic}
 
       HOP_SERVER_USER: ${HOP_SERVER_USER}
       HOP_SERVER_PASS: ${HOP_SERVER_PASSWORD}
       HOP_SERVER_PORT: "8080"
       HOP_SERVER_MAX_OBJECT_TIMEOUT: "1440"
       HOP_SERVER_MAX_LOG_LINES: "100000"
+      HOP_MAX_LOG_EXECUTIONS: ${HOP_MAX_LOG_EXECUTIONS:-10000}
 
       # Substitui o -XX:+AggressiveHeap da imagem, que reservava ~metade da RAM do host.
       # O heap fica em 70% do mem_limit (~4,2 GB); o restante cobre metaspace, threads e GC.
       HOP_OPTIONS: "-XX:MaxRAMPercentage=70 -XX:+ExitOnOutOfMemoryError"
 
       DATABASE_URL: ${HOP_WRITE_JDBC_URL}
-      ADMIN_DATABASE_URL: ${HOP_ADMIN_JDBC_URL}
 
-    # Host compartilhado (17 GB, Postgres na mesma máquina): limita o Hop
-    # e impede o uso de swap.
-    mem_limit: 6g
-    memswap_limit: 6g
-    cpus: 16
+    # Host compartilhado: limita o Hop e impede o uso de swap.
+    mem_limit: ${HOP_MEM_LIMIT:-6g}
+    memswap_limit: ${HOP_MEM_LIMIT:-6g}
+    cpus: ${HOP_CPUS:-8}
 
     volumes:
       - hop_input:/files/jade-extrator/datasets/lattes_xml
+      - hop_logs:/files/jade-extrator/logs
 
     ports:
-      - "127.0.0.1:${HOP_SERVER_PORT}:8080"
+      - "127.0.0.1:${HOP_SERVER_PORT:-8080}:8080"
+
+    logging:
+      driver: local
+      options:
+        max-size: "20m"
+        max-file: "5"
 
     healthcheck:
       test: ["CMD-SHELL", "curl -f -u ${HOP_SERVER_USER}:${HOP_SERVER_PASSWORD} http://localhost:8080/hop/status/ || exit 1"]
@@ -43,3 +49,5 @@ services:
 volumes:
   hop_input:
     name: simcc_hop_input
+  hop_logs:
+    name: simcc_hop_logs

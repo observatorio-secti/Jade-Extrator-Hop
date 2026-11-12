@@ -1,2 +1,4 @@
-datasets/research_lines.csv
-*.xml
+datasets/lattes_xml/*
+.env
+audit
+logs/

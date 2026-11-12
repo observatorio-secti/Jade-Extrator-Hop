@@ -1030,7 +1030,7 @@ FROM "public".city
     <commit>100</commit>
     <truncate>N</truncate>
     <only_when_have_rows>N</only_when_have_rows>
-    <ignore_errors>Y</ignore_errors>
+    <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_daily>N</partitioning_daily>
@@ -1695,16 +1695,5 @@ FROM "public".researcher</sql>
   <notepads/>
   <attributes/>
   <transform_error_handling>
-    <error>
-      <source_transform>Table Insert  Researcher</source_transform>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </transform_error_handling>
 </pipeline>

@@ -27,6 +27,31 @@
     </hop>
     <hop>
       <from>Renomeando campos</from>
+      <to>Sort CSV state</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table state</from>
+      <to>Sort DB state</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort CSV state</from>
+      <to>Merge join state</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort DB state</from>
+      <to>Merge join state</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join state</from>
+      <to>Filter novos state</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter novos state</from>
       <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
@@ -52,7 +77,7 @@
     <buffer_size>50000</buffer_size>
     <schemaDefinition/>
     <ignoreFields>N</ignoreFields>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
@@ -138,7 +163,7 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>160</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -182,7 +207,146 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>336</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort CSV state</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>abbreviation</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Table state</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <execute_each_row>N</execute_each_row>
+    <limit>0</limit>
+    <sql>SELECT abbreviation AS db_exists FROM "public"."state"</sql>
+    <variables_active>N</variables_active>
+    <attributes/>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>208</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort DB state</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_exists</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>208</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Merge join state</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <keys_1>
+      <key>abbreviation</key>
+    </keys_1>
+    <keys_2>
+      <key>db_exists</key>
+    </keys_2>
+    <transform1>Sort CSV state</transform1>
+    <transform2>Sort DB state</transform2>
+    <attributes/>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Filter novos state</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compare>
+      <condition>
+        <conditions/>
+        <function>IS NULL</function>
+        <leftvalue>db_exists</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
+      </condition>
+    </compare>
+    <send_true_to>Inserindo dados</send_true_to>
+    <attributes/>
+    <GUI>
+      <xloc>848</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -236,7 +400,7 @@
     <use_batch>Y</use_batch>
     <attributes/>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>1024</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>

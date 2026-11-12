@@ -1,0 +1,11 @@
+{
+  "engineRunConfiguration": {
+    "Local": {
+      "safe_mode": false
+    }
+  },
+  "name": "local",
+  "description": "Execucao local de workflows com persistencia em local-audit",
+  "executionInfoLocationName": "local-audit",
+  "defaultSelection": true
+}

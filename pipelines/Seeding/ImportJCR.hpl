@@ -27,6 +27,31 @@
     </hop>
     <hop>
       <from>Renomeando campos</from>
+      <to>Sort CSV jcr</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table jcr</from>
+      <to>Sort DB jcr</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort CSV jcr</from>
+      <to>Merge join jcr</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort DB jcr</from>
+      <to>Merge join jcr</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join jcr</from>
+      <to>Filter novos jcr</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter novos jcr</from>
       <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
@@ -118,7 +143,7 @@
     <use_batch>Y</use_batch>
     <attributes/>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>1024</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
@@ -143,7 +168,7 @@
     <buffer_size>50000</buffer_size>
     <schemaDefinition/>
     <ignoreFields>N</ignoreFields>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
@@ -295,7 +320,7 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>224</xloc>
+      <xloc>160</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
@@ -380,7 +405,236 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>336</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort CSV jcr</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"rank"</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"journalname"</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"jcryear"</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"issn"</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"eissn"</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>"totalcites"</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Table jcr</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>ApplicationDB</connection>
+    <execute_each_row>N</execute_each_row>
+    <limit>0</limit>
+    <sql>SELECT DISTINCT "rank" AS db_rank, journalname AS db_journalname, jcryear AS db_jcryear, issn AS db_issn, eissn AS db_eissn, totalcites AS db_totalcites, '1' AS db_exists FROM "public".jcr</sql>
+    <variables_active>N</variables_active>
+    <attributes/>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>272</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Sort DB jcr</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compress>N</compress>
+    <directory>${java.io.tmpdir}</directory>
+    <fields>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_rank</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_journalname</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_jcryear</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_issn</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_eissn</name>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <name>db_totalcites</name>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <sort_prefix>out</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <unique_rows>N</unique_rows>
+    <attributes/>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>272</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Merge join jcr</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <keys_1>
+      <key>"rank"</key>
+      <key>"journalname"</key>
+      <key>"jcryear"</key>
+      <key>"issn"</key>
+      <key>"eissn"</key>
+      <key>"totalcites"</key>
+    </keys_1>
+    <keys_2>
+      <key>db_rank</key>
+      <key>db_journalname</key>
+      <key>db_jcryear</key>
+      <key>db_issn</key>
+      <key>db_eissn</key>
+      <key>db_totalcites</key>
+    </keys_2>
+    <transform1>Sort CSV jcr</transform1>
+    <transform2>Sort DB jcr</transform2>
+    <attributes/>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Filter novos jcr</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compare>
+      <condition>
+        <conditions/>
+        <function>IS NULL</function>
+        <leftvalue>db_exists</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
+      </condition>
+    </compare>
+    <send_true_to>Inserindo dados</send_true_to>
+    <attributes/>
+    <GUI>
+      <xloc>848</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
