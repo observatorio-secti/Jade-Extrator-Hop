@@ -207,9 +207,11 @@
     <transform2>Sort by Area do Conhecimento</transform2>
     <keys_1>
       <key>expertise_name</key>
+      <key>great_area_name</key>
     </keys_1>
     <keys_2>
       <key>NOME-DA-AREA-DO-CONHECIMENTO</key>
+      <key>NOME-GRANDE-AREA-DO-CONHECIMENTO</key>
     </keys_2>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -386,6 +388,11 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>
+      <field>
+        <name>great_area_name</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <distribute>Y</distribute>
@@ -478,6 +485,14 @@
         <collator_strength>0</collator_strength>
         <presorted>N</presorted>
       </field>
+      <field>
+        <name>NOME-GRANDE-AREA-DO-CONHECIMENTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
@@ -503,6 +518,14 @@
     <fields>
       <field>
         <name>expertise_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>great_area_name</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -607,6 +630,19 @@
         <pad_len/>
         <pad_char/>
       </field>
+      <field>
+        <in_stream_name>NOME-GRANDE-AREA-DO-CONHECIMENTO</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>lower</lower_upper>
+        <init_cap>yes</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+        <padding_type>none</padding_type>
+        <pad_len/>
+        <pad_char/>
+      </field>
     </fields>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -624,11 +660,13 @@
   <transform>
     <type>TableInput</type>
     <name>Table Area_Expertise</name>
-    <sql>SELECT DISTINCT ON ("name")
-  id
-, "name"
-FROM "public".area_expertise
-ORDER BY "name", id;</sql>
+    <sql>SELECT DISTINCT ON (ae."name", ae.great_area_expertise_id)
+  ae.id
+, ae."name"
+, gae."name" AS great_area_name
+FROM "public".area_expertise ae
+LEFT JOIN "public".great_area_expertise gae ON ae.great_area_expertise_id = gae.id
+ORDER BY ae."name", ae.great_area_expertise_id, ae.id;</sql>
     <limit>0</limit>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>

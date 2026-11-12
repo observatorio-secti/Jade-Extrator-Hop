@@ -335,6 +335,37 @@
     <attributes/>
   </transform>
   <transform>
+    <type>StringOperations</type>
+    <name>String operations</name>
+    <fields>
+      <field>
+        <in_stream_name>NOME-GRANDE-AREA-DO-CONHECIMENTO</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>lower</lower_upper>
+        <init_cap>yes</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+        <padding_type>none</padding_type>
+        <pad_len/>
+        <pad_char/>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>384</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>SelectValues</type>
     <name>Select table </name>
     <fields>
@@ -505,6 +536,11 @@ ORDER BY "name", id;</sql>
     </hop>
     <hop>
       <from>Select Area_Expertise</from>
+      <to>String operations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>String operations</from>
       <to>Sort by Grande Area do Conhecimento</to>
       <enabled>Y</enabled>
     </hop>
