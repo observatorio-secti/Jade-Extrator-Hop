@@ -299,6 +299,97 @@
     <attributes/>
   </transform>
   <transform>
+    <type>SelectValues</type>
+    <name>Select researcher_id</name>
+    <fields>
+      <field>
+        <name>researcher_id</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1872</xloc>
+      <yloc>208</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>Unique</type>
+    <name>Unique researcher_id</name>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>researcher_id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1984</xloc>
+      <yloc>208</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>BlockingTransform</type>
+    <name>Blocking all rows</name>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <pass_all_rows>Y</pass_all_rows>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>1984</xloc>
+      <yloc>448</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
+    <type>BlockUntilTransformsFinish</type>
+    <name>Wait for Delete</name>
+    <transforms>
+      <transform>
+        <name>Delete</name>
+        <CopyNr>0</CopyNr>
+      </transform>
+    </transforms>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+    <GUI>
+      <xloc>2128</xloc>
+      <yloc>448</yloc>
+    </GUI>
+    <description/>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+  </transform>
+  <transform>
     <type>Delete</type>
     <name>Delete</name>
     <lookup>
@@ -315,8 +406,8 @@
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
-      <xloc>2080</xloc>
-      <yloc>336</yloc>
+      <xloc>2096</xloc>
+      <yloc>208</yloc>
     </GUI>
     <description/>
     <partitioning>
@@ -1584,7 +1675,7 @@ FROM researcher</sql>
     <keys_2>
       <key>lattes_id</key>
     </keys_2>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <copies>1</copies>
     <GUI>
       <xloc>1840</xloc>
@@ -1811,11 +1902,31 @@ FROM researcher</sql>
     </hop>
     <hop>
       <from>Quem é esse pesquisador?</from>
+      <to>Select researcher_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select researcher_id</from>
+      <to>Unique researcher_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique researcher_id</from>
       <to>Delete</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Delete</from>
+      <from>Quem é esse pesquisador?</from>
+      <to>Blocking all rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking all rows</from>
+      <to>Wait for Delete</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Wait for Delete</from>
       <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
