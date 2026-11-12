@@ -1787,6 +1787,11 @@
     <name>Select values 2 2</name>
     <fields>
       <field>
+        <name>id</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
         <name>researcher_id</name>
         <rename>researcher_id_db</rename>
         <length>-2</length>
