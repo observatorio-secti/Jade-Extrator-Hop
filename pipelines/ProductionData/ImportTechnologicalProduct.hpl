@@ -233,9 +233,11 @@
     <join_type>RIGHT OUTER</join_type>
     <keys_1>
       <key>title</key>
+      <key>researcher_id</key>
     </keys_1>
     <keys_2>
       <key>TITULO</key>
+      <key>id</key>
     </keys_2>
     <transform1>Sort rows 3</transform1>
     <transform2>Sort rows 4</transform2>

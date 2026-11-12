@@ -292,9 +292,9 @@
       <field>
         <name>SEQUENCIA-PROJETO</name>
         <xPath>@SEQUENCIA-PROJETO</xPath>
-        <type>None</type>
+        <type>Integer</type>
         <length>-1</length>
-        <format/>
+        <format>#</format>
         <trim_type>none</trim_type>
         <element_type>Node</element_type>
         <result_type>valueof</result_type>
@@ -763,7 +763,7 @@ FROM researcher</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -795,7 +795,7 @@ FROM researcher</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -890,7 +890,7 @@ FROM research_project</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -938,7 +938,7 @@ FROM research_project</sql>
     <sort_prefix>out</sort_prefix>
     <sort_size>1000000</sort_size>
     <free_memory/>
-    <unique_rows>N</unique_rows>
+    <unique_rows>Y</unique_rows>
     <compress>N</compress>
     <compress_variables/>
     <distribute>Y</distribute>
@@ -993,7 +993,7 @@ FROM research_project</sql>
         <conditions/>
       </condition>
     </compare>
-    <send_true_to>Normalizando</send_true_to>
+    <send_true_to>Inserindo dados</send_true_to>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -1023,7 +1023,17 @@ FROM research_project</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Merge join</from>
+      <to>Normalizando</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Normalizando</from>
+      <to>Ordenando campos XML</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Removendo já cadastrados</from>
       <to>Inserindo dados</to>
       <enabled>Y</enabled>
     </hop>
@@ -1053,11 +1063,6 @@ FROM research_project</sql>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join</from>
-      <to>Ordenando campos XML</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Ordenando campos XML</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
@@ -1070,11 +1075,6 @@ FROM research_project</sql>
     <hop>
       <from>Merge join 2</from>
       <to>Removendo já cadastrados</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Removendo já cadastrados</from>
-      <to>Normalizando</to>
       <enabled>Y</enabled>
     </hop>
   </order>
