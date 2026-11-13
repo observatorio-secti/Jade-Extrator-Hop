@@ -1512,6 +1512,11 @@
     <fields>
       <field>
         <length>-2</length>
+        <name>id</name>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <length>-2</length>
         <name>researcher_id</name>
         <precision>-2</precision>
         <rename>researcher_id_db</rename>
@@ -2553,23 +2558,23 @@ FROM "public".researcher
       </key>
       <value>
         <name>nature</name>
-        <rename>nature</rename>
+        <rename>Natureza</rename>
       </value>
       <value>
         <name>form_participation</name>
-        <rename>form_participation</rename>
+        <rename>Forma de Participacao</rename>
       </value>
       <value>
         <name>type_participation</name>
-        <rename>type_participation</rename>
+        <rename>Tipo de Participacao</rename>
       </value>
       <value>
         <name>year</name>
-        <rename>year</rename>
+        <rename>Ano</rename>
       </value>
       <value>
         <name>sequence_code</name>
-        <rename>sequence_code</rename>
+        <rename>SEQUENCIA-PRODUCAO</rename>
       </value>
     </lookup>
     <GUI>
