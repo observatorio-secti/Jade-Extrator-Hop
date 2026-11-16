@@ -1,0 +1,50 @@
+[project]
+name = "jade-extrator-hop"
+version = "0.1.0"
+description = "Pipelines e workflows Apache Hop do extrator Lattes (SIMCC) com suíte de testes estáticos e de integração"
+requires-python = ">=3.12,<4.0"
+dependencies = []
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+psycopg = { extras = ["binary"], version = "^3.2.0" }
+ruff = "^0.8.0"
+taskipy = "^1.14.0"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+preview = true
+select = ["I", "F", "E", "W", "PL", "PT"]
+ignore = ["PLR2004", "PLR0911", "PLR0912", "PLR0914", "PLR0915", "PLC0415"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR2004", "PLC1901"]
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --tb=short -p no:warnings"
+markers = [
+    "static: Camada 1 - validação estática rápida de arquivos .hpl e .hwf sem Docker/banco",
+    "integration: Camada 2 - execução caixa-preta no Apache Hop com PostgreSQL de teste",
+]
+
+[tool.taskipy.tasks]
+lint = "ruff check tests"
+format = "ruff format tests"
+test_static = "pytest -m static"
+test_integration = "pytest -m integration"
+test = "pytest"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

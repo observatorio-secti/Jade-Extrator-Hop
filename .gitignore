@@ -2,3 +2,8 @@ datasets/lattes_xml/*
 .env
 audit
 logs/
+.venv/
+.pytest_cache/
+__pycache__/
+.ruff_cache/
+.agents/
