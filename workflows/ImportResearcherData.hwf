@@ -213,8 +213,41 @@
       <parallel>N</parallel>
       <attributes_hac/>
     </action>
+    <action>
+      <filename>${PROJECT_HOME}/pipelines/ResearcherData/ImportProfessionalExperience.hpl</filename>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <create_parent_folder>N</create_parent_folder>
+      <set_logfile>N</set_logfile>
+      <set_append_logfile>N</set_append_logfile>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <wait_until_finished>Y</wait_until_finished>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <run_configuration>local</run_configuration>
+      <name>ImportProfessionalExperience.hpl</name>
+      <description/>
+      <type>PIPELINE</type>
+      <attributes/>
+      <xloc>368</xloc>
+      <yloc>448</yloc>
+      <parallel>N</parallel>
+      <attributes_hac/>
+    </action>
   </actions>
   <hops>
+    <hop>
+      <from>ReadXML.hpl</from>
+      <to>ImportProfessionalExperience.hpl</to>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+      <enabled>Y</enabled>
+    </hop>
     <hop>
       <from>ReadXML.hpl</from>
       <to>ImportAddressResearcher.hpl</to>
