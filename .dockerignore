@@ -1,3 +1,13 @@
 datasets/lattes_xml
 datasets/research_lines.csv
 *.xml
+.venv
+.pytest_cache
+__pycache__
+.ruff_cache
+.agents
+tests
+pyproject.toml
+poetry.lock
+poetry.toml
+AGENTS.md
