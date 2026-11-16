@@ -658,7 +658,7 @@
     <extensionFieldName/>
     <sizeFieldName/>
     <distribute>Y</distribute>
-    <copies>4</copies>
+    <copies>2</copies>
     <GUI>
       <xloc>352</xloc>
       <yloc>512</yloc>
@@ -1350,7 +1350,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <unique_rows>N</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
@@ -1381,7 +1381,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <unique_rows>N</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
@@ -1412,7 +1412,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <unique_rows>N</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
@@ -1443,7 +1443,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <unique_rows>N</unique_rows>
     <compress>N</compress>
     <distribute>Y</distribute>
@@ -1490,7 +1490,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <free_memory/>
     <unique_rows>Y</unique_rows>
     <compress>N</compress>
@@ -1539,7 +1539,7 @@
     </fields>
     <directory>${java.io.tmpdir}</directory>
     <sort_prefix>out</sort_prefix>
-    <sort_size>1000000</sort_size>
+    <sort_size>50000</sort_size>
     <free_memory/>
     <unique_rows>N</unique_rows>
     <compress>N</compress>
