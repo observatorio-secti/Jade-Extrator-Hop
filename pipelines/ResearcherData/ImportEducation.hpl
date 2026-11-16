@@ -321,18 +321,25 @@
     <attributes/>
   </transform>
   <transform>
-    <type>Unique</type>
-    <name>Unique researcher_id</name>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
+    <type>SortRows</type>
+    <name>Sort researcher_id</name>
     <fields>
       <field>
         <name>researcher_id</name>
-        <case_insensitive>N</case_insensitive>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
+    <directory>${java.io.tmpdir}</directory>
+    <sort_prefix>srt</sort_prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <unique_rows>Y</unique_rows>
+    <compress>N</compress>
+    <compress_variables/>
     <distribute>Y</distribute>
     <copies>1</copies>
     <GUI>
@@ -1907,11 +1914,11 @@ FROM researcher</sql>
     </hop>
     <hop>
       <from>Select researcher_id</from>
-      <to>Unique researcher_id</to>
+      <to>Sort researcher_id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique researcher_id</from>
+      <from>Sort researcher_id</from>
       <to>Delete</to>
       <enabled>Y</enabled>
     </hop>
