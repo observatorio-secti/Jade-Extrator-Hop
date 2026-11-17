@@ -60,7 +60,7 @@
                     if(DOUTORADO =="CONCLUIDO"){
                     maiorTitulacao = "DOUTORADO"
                     }else{
-                    if(MESTRADO =="CONCLUIDO" ){
+                    if(MESTRADO =="CONCLUIDO" || MESTRADO_PROFISSIONALIZANTE =="CONCLUIDO"){
                     maiorTitulacao = "MESTRADO"
                     }else{
                     if(ESPECIALIZACAO =="CONCLUIDO"){
@@ -150,6 +150,21 @@
       <field>
         <name>MESTRADO</name>
         <xPath>MESTRADO/@STATUS-DO-CURSO</xPath>
+        <type>String</type>
+        <length>-1</length>
+        <format/>
+        <trim_type>none</trim_type>
+        <element_type>node</element_type>
+        <result_type>valueof</result_type>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>MESTRADO_PROFISSIONALIZANTE</name>
+        <xPath>MESTRADO-PROFISSIONALIZANTE/@STATUS-DO-CURSO</xPath>
         <type>String</type>
         <length>-1</length>
         <format/>
@@ -318,6 +333,11 @@
       </field>
       <field>
         <name>MESTRADO</name>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>
+      <field>
+        <name>MESTRADO_PROFISSIONALIZANTE</name>
         <length>-2</length>
         <precision>-2</precision>
       </field>

@@ -27,7 +27,8 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE public.researcher (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR NOT NULL,
-    lattes_id CHAR(16) NOT NULL UNIQUE
+    lattes_id CHAR(16) NOT NULL UNIQUE,
+    graduation VARCHAR
 );
 
 CREATE TABLE public.researcher_professional_experience (
