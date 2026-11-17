@@ -328,3 +328,65 @@ def test_import_professional_experience_static_contract():
         'ImportProfessionalExperience.hpl deve estar registrada em '
         'ImportResearcherData.hwf'
     )
+
+
+def test_import_academic_degree_static_contract():
+    """Contrato estático da pipeline ImportAcademicDegree."""
+    hpl_path = (
+        PROJECT_ROOT
+        / 'pipelines'
+        / 'ResearcherData'
+        / 'ImportAcademicDegree.hpl'
+    )
+    root = ET.parse(hpl_path).getroot()
+    transforms = {t.findtext('name'): t for t in root.findall('transform')}
+
+    xml_reader = transforms.get('Read XML graduation')
+    assert xml_reader is not None, (
+        'Transform "Read XML graduation" deve existir'
+    )
+    assert xml_reader.findtext('encoding') == 'ISO-8859-1', (
+        'getXMLData deve usar encoding ISO-8859-1 para currículos Lattes'
+    )
+
+    xml_fields = {
+        f.findtext('name'): f.findtext('xPath')
+        for f in xml_reader.findall('./fields/field')
+    }
+    assert (
+        xml_fields.get('MESTRADO_PROFISSIONALIZANTE')
+        == 'MESTRADO-PROFISSIONALIZANTE/@STATUS-DO-CURSO'
+    ), (
+        'Read XML graduation deve extrair MESTRADO_PROFISSIONALIZANTE de '
+        'MESTRADO-PROFISSIONALIZANTE/@STATUS-DO-CURSO'
+    )
+
+    select_values = transforms.get('Select values')
+    assert select_values is not None, 'Transform "Select values" deve existir'
+    selected_fields = {
+        f.findtext('name') for f in select_values.findall('./fields/field')
+    }
+    assert 'MESTRADO_PROFISSIONALIZANTE' in selected_fields, (
+        'Select values deve repassar MESTRADO_PROFISSIONALIZANTE'
+    )
+
+    script_transform = transforms.get('Pegar a maior titulação ')
+    assert script_transform is not None, (
+        'Transform "Pegar a maior titulação " deve existir'
+    )
+    script_text = script_transform.findtext('.//jsScript_script') or ''
+    assert 'MESTRADO_PROFISSIONALIZANTE' in script_text, (
+        'Script de maior titulação deve considerar MESTRADO_PROFISSIONALIZANTE'
+    )
+
+    hwf_path = PROJECT_ROOT / 'workflows' / 'ImportResearcherData.hwf'
+    hwf_root = ET.parse(hwf_path).getroot()
+    action_files = {
+        a.findtext('filename') for a in hwf_root.findall('./actions/action')
+    }
+    assert (
+        '${PROJECT_HOME}/pipelines/ResearcherData/ImportAcademicDegree.hpl'
+    ) in action_files, (
+        'ImportAcademicDegree.hpl deve estar registrada em '
+        'ImportResearcherData.hwf'
+    )
